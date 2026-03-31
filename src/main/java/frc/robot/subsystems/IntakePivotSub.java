@@ -32,9 +32,9 @@ public class IntakePivotSub extends SubsystemBase {
         intakePivotConfig.Slot0.kG = 1.05d;
         intakePivotConfig.Slot0.GravityType = GravityTypeValue.Arm_Cosine;
         intakePivotConfig.Feedback.RotorToSensorRatio = 9.63;
-        intakePivotConfig.Slot0.kP = 1.0;
+        intakePivotConfig.Slot0.kP = 2.0;
         intakePivotConfig.Slot0.kI = 0;
-        intakePivotConfig.Slot0.kD = 0;
+        intakePivotConfig.Slot0.kD = 0.2;
         intakePivotConfig.Slot0.kS = -0.05;
         intakePivotConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
         intakePivotConfig.MotorOutput.NeutralMode = NeutralModeValue.Coast;

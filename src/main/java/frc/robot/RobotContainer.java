@@ -195,19 +195,6 @@ public class RobotContainer {
                         .withVelocityY(-tunedJoystick.getLeftX() * MaxSpeed)
                         .withRotationalRate(-tunedJoystick.getRightX() * MaxAngularRate)));
 
-        controller.rightTrigger().whileTrue(new ParallelCommandGroup(// ? mag dump while moving
-                new autoRangeFire_Com(
-                        m_shooter,
-                        m_vision,
-                        controller,
-                        hdssm,
-                        () -> -tunedJoystick.getLeftY() * MaxSpeed * 0.1, // vx lambda
-                        () -> -tunedJoystick.getLeftX() * MaxSpeed * 0.1 // vy lambda
-                ),
-                new SequentialCommandGroup(
-                        new WaitCommand(0.25),
-                        new HopperPercent_Com(m_hopper, 1.0))));
-
         controller.leftTrigger().whileTrue(
                 drivetrain.applyRequest(() -> {
                     double vx = -tunedJoystick.getLeftY() * MaxSpeed * 0.1;
@@ -220,6 +207,19 @@ public class RobotContainer {
                     return drive.withVelocityX(vx).withVelocityY(vy).withRotationalRate(omega)
                             .withRotationalDeadband(0);
                 }));
+
+        controller.rightTrigger().whileTrue(new ParallelCommandGroup(
+                new autoRangeFire_Com(
+                        m_shooter,
+                        m_vision,
+                        controller,
+                        hdssm,
+                        () -> -tunedJoystick.getLeftY() * MaxSpeed * 0.3, // vx lambda
+                        () -> -tunedJoystick.getLeftX() * MaxSpeed * 0.3 // vy lambda
+                ),
+                new SequentialCommandGroup(
+                        new WaitCommand(0.25),
+                        new HopperPercent_Com(m_hopper, 1.0))));
 
         controller.pov(0).onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 2750.0));
         controller.pov(180).onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 0.0));
