@@ -1,5 +1,5 @@
 name = "IntakeRollersMotor2"
-canID = 21
+canID = 30
 inverted = false
 isBreakMode = false
 
