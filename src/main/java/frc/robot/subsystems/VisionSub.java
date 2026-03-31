@@ -112,8 +112,8 @@ public class VisionSub extends SubsystemBase {
         double distance = 0.0;
 
         // Hub position (Blue side)
-        double HUB_X = 4.912; //4.612
-        double HUB_Y = 3.871; //4.021
+        double HUB_X = 4.612;
+        double HUB_Y = 4.021;
 
         double fieldLength = fieldLayout.getFieldLength();
 
@@ -175,8 +175,8 @@ public class VisionSub extends SubsystemBase {
         double turn = 0.0;
 
         // Hub position (Blue side only)
-        double HUB_X = 4.912; //4.612
-        double HUB_Y = 3.871; //4.021
+        double HUB_X = 4.612;
+        double HUB_Y = 4.021;
 
         double fieldLength = fieldLayout.getFieldLength();
 
