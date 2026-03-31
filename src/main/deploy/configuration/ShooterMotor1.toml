@@ -1,0 +1,11 @@
+name = "ShooterMotor1"
+canID = 25
+inverted = false
+isBreakMode = false
+
+[slot0]
+kp = 0.0
+ki = 0.0
+kd = 0.0
+ks = 0.0
+kv = 0.0 

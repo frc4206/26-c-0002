@@ -5,6 +5,9 @@
 # Prerequisites
 *.d
 
+## Battleaid
+gradle.properties
+
 # Compiled Object files
 *.slo
 *.lo

@@ -9,7 +9,7 @@
         "Id": 10,
         "Name": "FL Cancoder",
         "Model": "CANCoder",
-        "CANbus": "rio",
+        "CANbus": "CANivore",
         "CANbusFriendly": "",
         "SelectedMotorType": null
       },
@@ -17,26 +17,26 @@
         "Id": 8,
         "Name": "FL Turn",
         "Model": "Talon FX vers. C",
-        "CANbus": "rio",
+        "CANbus": "CANivore",
         "CANbusFriendly": "",
         "SelectedMotorType": {
           "Name": "WCP Kraken x60",
           "FreeSpeedRps": 96.7,
-          "SlipCurrentLimit": 120,
-          "StatorCurrentLimit": 60
+          "SlipCurrentLimit": 60,
+          "StatorCurrentLimit": 30
         }
       },
       "DriveMotor": {
         "Id": 9,
         "Name": "FL Drive",
         "Model": "Talon FX vers. C",
-        "CANbus": "rio",
+        "CANbus": "CANivore",
         "CANbusFriendly": "",
         "SelectedMotorType": {
           "Name": "WCP Kraken x60",
           "FreeSpeedRps": 96.7,
-          "SlipCurrentLimit": 120,
-          "StatorCurrentLimit": 60
+          "SlipCurrentLimit": 60,
+          "StatorCurrentLimit":30
         }
       },
       "IsEncoderInverted": false,
@@ -58,7 +58,7 @@
         "Id": 4,
         "Name": "FR CANCoder",
         "Model": "CANCoder",
-        "CANbus": "rio",
+        "CANbus": "CANivore",
         "CANbusFriendly": "",
         "SelectedMotorType": null
       },
@@ -66,26 +66,26 @@
         "Id": 3,
         "Name": "FR Turn",
         "Model": "Talon FX vers. C",
-        "CANbus": "rio",
+        "CANbus": "CANivore",
         "CANbusFriendly": "",
         "SelectedMotorType": {
           "Name": "WCP Kraken x60",
           "FreeSpeedRps": 96.7,
-          "SlipCurrentLimit": 120,
-          "StatorCurrentLimit": 60
+          "SlipCurrentLimit": 60,
+          "StatorCurrentLimit": 30
         }
       },
       "DriveMotor": {
         "Id": 2,
         "Name": "FR Drive",
         "Model": "Talon FX vers. C",
-        "CANbus": "rio",
+        "CANbus": "CANivore",
         "CANbusFriendly": "",
         "SelectedMotorType": {
           "Name": "WCP Kraken x60",
           "FreeSpeedRps": 96.7,
-          "SlipCurrentLimit": 120,
-          "StatorCurrentLimit": 60
+          "SlipCurrentLimit": 60,
+          "StatorCurrentLimit": 30
         }
       },
       "IsEncoderInverted": false,
@@ -107,7 +107,7 @@
         "Id": 13,
         "Name": "BL CANCoder",
         "Model": "CANCoder",
-        "CANbus": "rio",
+        "CANbus": "CANivore",
         "CANbusFriendly": "",
         "SelectedMotorType": null
       },
@@ -115,26 +115,26 @@
         "Id": 12,
         "Name": "BL Turn",
         "Model": "Talon FX vers. C",
-        "CANbus": "rio",
+        "CANbus": "CANivore",
         "CANbusFriendly": "",
         "SelectedMotorType": {
           "Name": "WCP Kraken x60",
           "FreeSpeedRps": 96.7,
-          "SlipCurrentLimit": 120,
-          "StatorCurrentLimit": 60
+          "SlipCurrentLimit": 60,
+          "StatorCurrentLimit": 30
         }
       },
       "DriveMotor": {
         "Id": 11,
         "Name": "BL Drive",
         "Model": "Talon FX vers. C",
-        "CANbus": "rio",
+        "CANbus": "CANivore",
         "CANbusFriendly": "",
         "SelectedMotorType": {
           "Name": "WCP Kraken x60",
           "FreeSpeedRps": 96.7,
-          "SlipCurrentLimit": 120,
-          "StatorCurrentLimit": 60
+          "SlipCurrentLimit": 60,
+          "StatorCurrentLimit": 30
         }
       },
       "IsEncoderInverted": false,
@@ -156,7 +156,7 @@
         "Id": 7,
         "Name": "BR CANcoder",
         "Model": "CANCoder",
-        "CANbus": "rio",
+        "CANbus": "CANivore",
         "CANbusFriendly": "",
         "SelectedMotorType": null
       },
@@ -164,26 +164,26 @@
         "Id": 6,
         "Name": "BR Turn",
         "Model": "Talon FX vers. C",
-        "CANbus": "rio",
+        "CANbus": "CANivore",
         "CANbusFriendly": "",
         "SelectedMotorType": {
           "Name": "WCP Kraken x60",
           "FreeSpeedRps": 96.7,
-          "SlipCurrentLimit": 120,
-          "StatorCurrentLimit": 60
+          "SlipCurrentLimit": 60,
+          "StatorCurrentLimit": 30
         }
       },
       "DriveMotor": {
         "Id": 5,
         "Name": "BR Drive",
         "Model": "Talon FX vers. C",
-        "CANbus": "rio",
+        "CANbus": "CANivore",
         "CANbusFriendly": "",
         "SelectedMotorType": {
           "Name": "WCP Kraken x60",
           "FreeSpeedRps": 96.7,
-          "SlipCurrentLimit": 120,
-          "StatorCurrentLimit": 60
+          "SlipCurrentLimit": 60,
+          "StatorCurrentLimit": 30
         }
       },
       "IsEncoderInverted": false,
@@ -204,7 +204,7 @@
       "Id": 14,
       "Name": "Pigeon ",
       "Model": "Pigeon 2 vers. S",
-      "CANbus": "rio",
+      "CANbus": "CANivore",
       "CANbusFriendly": "",
       "SelectedMotorType": null
     },

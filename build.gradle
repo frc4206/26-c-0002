@@ -8,6 +8,16 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
+repositories {
+    maven {
+        url = uri("https://maven.pkg.github.com/frc4206/battleaid")
+        credentials {
+            username = project.findProperty("github.username") ?: System.getenv("GITHUB_USERNAME")
+            password = project.findProperty("github.token") ?: System.getenv("GITHUB_TOKEN")
+        }
+    }
+}
+
 def ROBOT_MAIN_CLASS = "frc.robot.Main"
 
 // Define my targets (RoboRIO) and artifacts (deployable files)
@@ -73,6 +83,8 @@ dependencies {
 
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.1'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    implementation 'org.team4206:battleaid:0.4.1'
 }
 
 test {

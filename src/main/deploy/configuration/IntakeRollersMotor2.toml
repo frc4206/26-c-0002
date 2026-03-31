@@ -1,0 +1,9 @@
+name = "IntakeRollersMotor2"
+canID = 21
+inverted = false
+isBreakMode = false
+
+[slot0]
+kp = 0.0
+ki = 0.0
+kd = 0.0
