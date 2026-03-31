@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.util.Optional;
 
 import org.photonvision.PhotonCamera;
+import org.team4206.battleaid.common.TunedJoystick;
+import org.team4206.battleaid.common.TunedJoystick.ResponseCurve;
 
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
@@ -77,28 +79,29 @@ public class RobotContainer {
     final ClimberSub m_climber = new ClimberSub(m_climberConfig);
     final HopperSub m_hopper = new HopperSub(m_hopperConfig);
 
-    /* Joysticks */
-    private final CommandXboxController m_driverController = new CommandXboxController(0);
-    private final CommandXboxController m_operatorController = new CommandXboxController(1);
-    private final CommandXboxController m_testingController = new CommandXboxController(2);
-    private final CommandXboxController m_climberController = new CommandXboxController(3);
-    private final CommandXboxController m_soloTestController = new CommandXboxController(5);
+    private final CommandXboxController controller = new CommandXboxController(0);
 
-    private double MaxSpeed = 1.0 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top
+    // then use the same controller handle
+    TunedJoystick tunedJoystick = new TunedJoystick(controller.getHID())
+            .useResponseCurve(ResponseCurve.SOFT)
+            .setDeadzone(0.1d);
+
+    private double MaxSpeed = 1.0 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired
+                                                                                        // top
                                                                                         // speed
-    private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second
+    private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per
+                                                                                      // second
                                                                                       // max angular velocity
 
     /* Setting up bindings for necessary control of the swerve drive platform */
     private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
-            .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.01) // Add a 3% deadband
-            .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // Use open-loop control for drive motors
+            .withDeadband(MaxSpeed * 0.01).withRotationalDeadband(MaxAngularRate * 0.01) // Add a 3% deadband
+            .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // Use open-loop control for drive
+                                                                     // motors
     private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
     private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
 
     private final Telemetry logger = new Telemetry(MaxSpeed);
-
-    private final CommandXboxController joystick = new CommandXboxController(0);
 
     private double m_targetRPM = 2000; // 2000
 
@@ -120,10 +123,12 @@ public class RobotContainer {
         /* Pathplanner Named Commands */
         /* Basic: */
         NamedCommands.registerCommand("Hopper", new HopperPercent_Com(m_hopper, 0.80).withTimeout(2.5));
-        NamedCommands.registerCommand("Flywheels", new SetFlywheelSpeed_Com(m_shooter, () -> 1775).withTimeout(4.5));
+        NamedCommands.registerCommand("Flywheels",
+                new SetFlywheelSpeed_Com(m_shooter, () -> 1775).withTimeout(4.5));
 
         /* Human Player Auto: */
-        NamedCommands.registerCommand("FlywheelsTrench", new ShooterPercent_Com(m_shooter, .51).withTimeout(5.0));
+        NamedCommands.registerCommand("FlywheelsTrench",
+                new ShooterPercent_Com(m_shooter, .51).withTimeout(5.0));
         NamedCommands.registerCommand("HopperShort", new HopperPercent_Com(m_hopper, 0.90).withTimeout(5));
 
         /* Depot Auto */
@@ -184,131 +189,45 @@ public class RobotContainer {
 
     private void configureBindings() {
 
-        // Note that X is defined as forward according to WPILib convention,
-        // and Y is defined as to the left according to WPILib convention.
         drivetrain.setDefaultCommand(
                 // Drivetrain will execute this command periodically
-                drivetrain.applyRequest(() -> drive.withVelocityX(-joystick.getLeftY() * MaxSpeed) // Drive forward with
-                                                                                                   // negative Y
-                                                                                                   // (forward)
-                        .withVelocityY(-joystick.getLeftX() * MaxSpeed) // Drive left with negative X (left)
-                        .withRotationalRate(-joystick.getRightX() * MaxAngularRate) // Drive counterclockwise with
-                                                                                    // negative X (left)
-                ));
+                drivetrain.applyRequest(() -> drive.withVelocityX(-tunedJoystick.getLeftY() * MaxSpeed)
+                        .withVelocityY(-tunedJoystick.getLeftX() * MaxSpeed)
+                        .withRotationalRate(-tunedJoystick.getRightX() * MaxAngularRate)));
 
-        m_driverController.leftTrigger().whileTrue(
+        controller.rightTrigger().whileTrue(new ParallelCommandGroup(// ? mag dump while moving
+                new autoRangeFire_Com(
+                        m_shooter,
+                        m_vision,
+                        controller,
+                        hdssm,
+                        () -> -tunedJoystick.getLeftY() * MaxSpeed * 0.1, // vx lambda
+                        () -> -tunedJoystick.getLeftX() * MaxSpeed * 0.1 // vy lambda
+                ),
+                new SequentialCommandGroup(
+                        new WaitCommand(0.25),
+                        new HopperPercent_Com(m_hopper, 1.0))));
+
+        controller.leftTrigger().whileTrue(
                 drivetrain.applyRequest(() -> {
-                    double vx = -joystick.getLeftY() * MaxSpeed * 0.1;
-                    double vy = -joystick.getLeftX() * MaxSpeed * 0.1;
+                    double vx = -tunedJoystick.getLeftY() * MaxSpeed * 0.1;
+                    double vy = -tunedJoystick.getLeftX() * MaxSpeed * 0.1;
 
-                    double omega = m_vision.getRotationToHub(drivetrain, vx, vy, hdftm) * MaxAngularRate;
-
+                    double omega = m_vision.getRotationToHub(drivetrain, vx, vy, hdftm)
+                            * MaxAngularRate;
                     // System.out.println("Distnace to HUB: " + m_vision.getDistanceToHub());
 
-                    return drive
-                            .withVelocityX(vx)
-                            .withVelocityY(vy)
-                            .withRotationalRate(omega)
+                    return drive.withVelocityX(vx).withVelocityY(vy).withRotationalRate(omega)
                             .withRotationalDeadband(0);
                 }));
 
-        m_driverController.b().toggleOnTrue(new ToggleIntakePosition(m_intakepivot));
-        m_driverController.rightTrigger().toggleOnTrue(new IntakePercent_Com(m_intakeroller, .45));
-        m_driverController.a().onTrue(drivetrain.runOnce(() -> {
-            drivetrain.seedFieldCentric();
-            drivetrain.getPigeon2().reset();
-        }));
+        controller.pov(0).onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 2750.0));
+        controller.pov(180).onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 0.0));
 
-        final var idle = new SwerveRequest.Idle();
-        RobotModeTriggers.disabled().whileTrue(
-                drivetrain.applyRequest(() -> idle).ignoringDisable(true));
+        controller.leftBumper().toggleOnTrue(new ToggleIntakePosition(m_intakepivot));
+        controller.rightBumper().toggleOnTrue(new IntakePercent_Com(m_intakeroller, .45));
 
-        m_operatorController.rightTrigger().toggleOnTrue(new HopperPercent_Com(m_hopper, 1));
-
-        // m_intake.setDefaultCommand(new IntakeJoystick_Com(m_intake,
-        // m_operatorController)); // Right stick
-        // m_operatorController.rightBumper().toggleOnTrue(new
-        // IntakePercent_Com(m_intake, .45));
-
-        m_operatorController.y().onTrue(new ShooterPercent_Com(m_shooter, 0.0));
-
-        m_operatorController.pov(0).onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 2750.0)); // to shoot from the corner
-
-        m_operatorController.x().onTrue(
-                new InstantCommand(() -> {
-                    m_targetRPM += 25;
-                    System.out.println("Right Bumper Pressed → Target RPM: " + m_targetRPM);
-                }));
-
-        /* Decrement target RPM */
-        m_operatorController.b().onTrue(
-                new InstantCommand(() -> {
-                    m_targetRPM -= 25;
-                    System.out.println("Left Bumper Pressed → Target RPM: " + m_targetRPM);
-                }));
-
-        // Changed from whileTrue to onTrue
-        m_operatorController.a().onTrue(
-                new SetFlywheelSpeed_Com(m_shooter, () -> m_targetRPM));
-
-        m_driverController.y()
-                .whileTrue(new ParallelCommandGroup(
-                        new autoRangeFire_Com(
-                                m_shooter,
-                                m_vision,
-                                m_driverController,
-                                hdssm,
-                                () -> -joystick.getLeftY() * MaxSpeed * 0.1, // vx lambda
-                                () -> -joystick.getLeftX() * MaxSpeed * 0.1 // vy lambda
-                        ),
-                        new SequentialCommandGroup(
-                                new WaitCommand(0.25),
-                                new HopperPercent_Com(m_hopper, 1.0))));
-
-        m_testingController.a().onTrue(new IncrementSpeedTesting_Com(m_shooter));
-        m_testingController.x().onTrue(new IncrementSpeedUp_Com(m_shooter, 0.01));
-        m_testingController.b().onTrue(new IncrementSpeedUp_Com(m_shooter, -0.01));
-
-        //! all below are temp bc I don't like switching btw controllers when testing. Feel free to delete - Parker
-
-        m_soloTestController.rightTrigger().whileTrue(new ParallelCommandGroup(//? mag dump while moving
-                        new autoRangeFire_Com(
-                                m_shooter,
-                                m_vision,
-                                m_soloTestController,
-                                hdssm,
-                                () -> -m_soloTestController.getLeftY() * MaxSpeed * 0.1, // vx lambda
-                                () -> -m_soloTestController.getLeftX() * MaxSpeed * 0.1 // vy lambda
-                        ),
-                        new SequentialCommandGroup(
-                                new WaitCommand(0.25),
-                                new HopperPercent_Com(m_hopper, 1.0))));
-
-        drivetrain.setDefaultCommand(
-                // Drivetrain will execute this command periodically
-                drivetrain.applyRequest(() -> drive.withVelocityX(-m_soloTestController.getLeftY() * MaxSpeed) // Drive forward with negative Y (forward)
-                        .withVelocityY(-m_soloTestController.getLeftX() * MaxSpeed) // Drive left with negative X (left)
-                        .withRotationalRate(-m_soloTestController.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
-                ));
-
-        m_soloTestController.leftTrigger().whileTrue(
-                drivetrain.applyRequest(() -> {
-                    double vx = -m_soloTestController.getLeftY() * MaxSpeed * 0.1;
-                    double vy = -m_soloTestController.getLeftX() * MaxSpeed * 0.1;
-
-                    double omega = m_vision.getRotationToHub(drivetrain, vx, vy, hdftm) * MaxAngularRate;
-                    // System.out.println("Distnace to HUB: " + m_vision.getDistanceToHub());
-
-                    return drive.withVelocityX(vx).withVelocityY(vy).withRotationalRate(omega).withRotationalDeadband(0);
-                }));
-        
-        m_soloTestController.pov(0).onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 2750.0));
-        m_soloTestController.pov(180).onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 0.0));
-
-        m_soloTestController.leftBumper().toggleOnTrue(new ToggleIntakePosition(m_intakepivot));
-        m_soloTestController.rightBumper().toggleOnTrue(new IntakePercent_Com(m_intakeroller, .45));
-
-        m_soloTestController.a().onTrue(drivetrain.runOnce(() -> {
+        controller.a().onTrue(drivetrain.runOnce(() -> {
             drivetrain.seedFieldCentric();
             drivetrain.getPigeon2().reset();
         }));
