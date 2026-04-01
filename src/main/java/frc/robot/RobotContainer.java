@@ -89,7 +89,7 @@ public class RobotContainer {
     private double MaxSpeed = 1.0 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired
                                                                                         // top
                                                                                         // speed
-    private double MaxAngularRate = RotationsPerSecond.of(1.5).in(RadiansPerSecond); // 3/4 of a rotation per
+    private double MaxAngularRate = RotationsPerSecond.of(1.0).in(RadiansPerSecond); // 3/4 of a rotation per
                                                                                       // second
                                                                                       // max angular velocity
 
@@ -132,7 +132,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("HopperShort", new HopperPercent_Com(m_hopper, 0.90).withTimeout(5));
 
         /* Depot Auto */
-        NamedCommands.registerCommand("IntakeOut", new ToggleIntakePosition(m_intakepivot));
+        NamedCommands.registerCommand("IntakeOut", new ToggleIntakePosition(m_intakepivot, false));
         NamedCommands.registerCommand("IntakeFuel", new IntakePercent_Com(m_intakeroller, 0.45));
 
         // camera = new PhotonCamera("frontcam");
@@ -210,23 +210,32 @@ public class RobotContainer {
                             .withRotationalDeadband(0);
                 }));
 
-        controller.rightTrigger().whileTrue(new ParallelCommandGroup(
+        controller.rightTrigger().whileTrue(
+            new ParallelCommandGroup
+            (
                 new autoRangeFire_Com(
-                        m_shooter,
-                        m_vision,
-                        controller,
-                        hdssm,
-                        () -> -tunedJoystick.getLeftY() * MaxSpeed * auto_aim_speed_modifier, // vx lambda
-                        () -> -tunedJoystick.getLeftX() * MaxSpeed * auto_aim_speed_modifier // vy lambda
+                    m_shooter,
+                    m_vision,
+                    controller,
+                    hdssm,
+                    () -> -tunedJoystick.getLeftY() * MaxSpeed * auto_aim_speed_modifier, // vx lambda
+                    () -> -tunedJoystick.getLeftX() * MaxSpeed * auto_aim_speed_modifier // vy lambda
                 ),
                 new SequentialCommandGroup(
-                        new WaitCommand(0.25),
-                        new HopperPercent_Com(m_hopper, 1.0))));
+                    new WaitCommand(0.25),
+                    new HopperPercent_Com(m_hopper, 1.0)
+                ),
+                new SequentialCommandGroup(
+                    new WaitCommand(1.5),
+                    new ToggleIntakePosition(m_intakepivot, true)
+                )
+            )
+        );
 
         controller.pov(0).onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 2750.0));
         controller.pov(180).onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 0.0));
 
-        controller.leftBumper().toggleOnTrue(new ToggleIntakePosition(m_intakepivot));
+        controller.leftBumper().toggleOnTrue(new ToggleIntakePosition(m_intakepivot, false));
         controller.rightBumper().toggleOnTrue(new IntakePercent_Com(m_intakeroller, .45));
 
         controller.a().onTrue(drivetrain.runOnce(() -> {

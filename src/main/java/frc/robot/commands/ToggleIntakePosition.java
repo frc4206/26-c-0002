@@ -13,20 +13,37 @@ public class ToggleIntakePosition extends Command {
     private static final double TOLERANCE_DEPLOYED = 0.3;
 
     private double target;
+    private boolean stow_only;
 
-    public ToggleIntakePosition(IntakePivotSub intake) {
+    public ToggleIntakePosition(IntakePivotSub intake, boolean stow_only) {
         this.intake = intake;
+        this.stow_only = stow_only;
         addRequirements(intake);
     }
 
     @Override
     public void initialize() {
-        target = isDeployed ? STOWED : DEPLOYED;
-        isDeployed = !isDeployed;
-        intake.setPositionOfIntakePivot(target);
-
-        System.out.println("Moving to: " + target);
-        System.out.println("MOTOR IS AT: " + intake.intakePivotMotor.getPosition());
+        // Decide what the target should be
+        if (stow_only) {
+            // Only stow if currently deployed
+            if (isDeployed) {
+                target = STOWED;
+                intake.setPositionOfIntakePivot(target);
+                System.out.println("STOW_ONLY: Moving to " + target);
+                System.out.println("MOTOR IS AT: " + intake.intakePivotMotor.getPosition());
+                isDeployed = false; // now it’s stowed
+            } else {
+                // Already stowed, do nothing
+                System.out.println("STOW_ONLY: Already stowed, skipping.");
+            }
+        } else {
+            // Normal toggle: deploy if stowed, stow if deployed
+            target = isDeployed ? STOWED : DEPLOYED;
+            intake.setPositionOfIntakePivot(target);
+            System.out.println("TOGGLE: Moving to " + target);
+            System.out.println("MOTOR IS AT: " + intake.intakePivotMotor.getPosition());
+            isDeployed = !isDeployed;
+        }
     }
 
     @Override
