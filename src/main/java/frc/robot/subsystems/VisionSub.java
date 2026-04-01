@@ -48,13 +48,7 @@ public class VisionSub extends SubsystemBase {
 
     public InterpolatingDoubleTreeMap hdssm;
     public InterpolatingDoubleTreeMap hdftm;
-
-    // private static final Pose3d HUB_BLUE = new Pose3d(
-    // 4.612,
-    // 4.021,
-    // 0.0,
-    // new Rotation3d());
-
+    
     private final CommandSwerveDrivetrain m_drivetrain;
 
     public VisionSub(CommandSwerveDrivetrain drivetrain, PhotonCamera frontcam) {
@@ -170,12 +164,9 @@ public class VisionSub extends SubsystemBase {
             if (tagPoseOptional.isPresent()) {
                 Pose3d tagPose = tagPoseOptional.get();
                 Transform3d camToTag = target.getBestCameraToTarget();
-                Transform3d robotToCamera = new Transform3d(
-                        new Translation3d(0.0508, 0.0, 0.4318),
-                        new Rotation3d(0, Math.toRadians(16.1), 0));
 
                 Pose3d cameraPose = tagPose.transformBy(camToTag.inverse());
-                Pose3d robotPose = cameraPose.transformBy(robotToCamera.inverse());
+                Pose3d robotPose = cameraPose.transformBy(robotToCam.inverse());
 
                 double robotX = robotPose.getX();
                 double robotY = robotPose.getY();
@@ -224,10 +215,6 @@ public class VisionSub extends SubsystemBase {
             velocity_y *= -1;
         }
 
-        Transform3d robotToCamera = new Transform3d(
-                new Translation3d(0.0508, 0.0, 0.4318),
-                new Rotation3d(0, Math.toRadians(16.1), 0));
-
         boolean targetVisible = false;
         var result = latestResult;
 
@@ -240,7 +227,7 @@ public class VisionSub extends SubsystemBase {
                 Pose3d tagPose = tagPoseOptional.get();
                 Transform3d camToTag = target.getBestCameraToTarget();
                 Pose3d cameraPose = tagPose.transformBy(camToTag.inverse());
-                Pose3d robotPose = cameraPose.transformBy(robotToCamera.inverse());
+                Pose3d robotPose = cameraPose.transformBy(robotToCam.inverse());
 
                 double robotX = robotPose.getX();
                 double robotY = robotPose.getY();
