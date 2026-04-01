@@ -145,12 +145,12 @@ public class RobotContainer {
 
     public void initHubDistanceShooterSpeedMap() {
         // gotta rebuild the table
-        hdssm.put(1.4, 1700.0); // TIME TO FLIGHT: 0.7825
-        hdssm.put(2.1, 1900.0); // TIME TO FLIGHT: 0.9250
-        hdssm.put(2.9, 2050.0); // TIME TO FLIGHT: 0.9625
-        hdssm.put(3.5, 2250.0); // TIME TO FLIGHT: 1.0750
-        hdssm.put(4.0, 2450.0); // TIME TO FLIGHT: 1.1750
-        hdssm.put(5.0, 2850.0); // TIME TO FLIGHT: 1.2375
+        hdssm.put(1.4, 1670.0); // TIME TO FLIGHT: 0.7825
+        hdssm.put(2.1, 1870.0); // TIME TO FLIGHT: 0.9250
+        hdssm.put(2.9, 2020.0); // TIME TO FLIGHT: 0.9625
+        hdssm.put(3.5, 2220.0); // TIME TO FLIGHT: 1.0750
+        hdssm.put(4.0, 2420.0); // TIME TO FLIGHT: 1.1750
+        hdssm.put(5.0, 2820.0); // TIME TO FLIGHT: 1.2375
 
         m_vision.hdssm = this.hdssm;
     }
