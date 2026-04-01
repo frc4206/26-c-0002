@@ -34,7 +34,7 @@ public class IntakePivotSub extends SubsystemBase {
         intakePivotConfig.Feedback.RotorToSensorRatio = 9.63;
         intakePivotConfig.Slot0.kP = 1.5;
         intakePivotConfig.Slot0.kI = 0;
-        intakePivotConfig.Slot0.kD = 0.1;
+        intakePivotConfig.Slot0.kD = 0.2;
         intakePivotConfig.Slot0.kS = -0.05;
         intakePivotConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
         intakePivotConfig.MotorOutput.NeutralMode = NeutralModeValue.Coast;

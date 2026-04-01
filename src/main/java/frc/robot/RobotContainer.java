@@ -90,8 +90,8 @@ public class RobotContainer {
                                                                                         // top
                                                                                         // speed
     private double MaxAngularRate = RotationsPerSecond.of(1.0).in(RadiansPerSecond); // 3/4 of a rotation per
-                                                                                      // second
-                                                                                      // max angular velocity
+                                                                                     // second
+                                                                                     // max angular velocity
 
     /* Setting up bindings for necessary control of the swerve drive platform */
     private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
@@ -211,26 +211,25 @@ public class RobotContainer {
                 }));
 
         controller.rightTrigger().whileTrue(
-            new ParallelCommandGroup
-            (
-                new autoRangeFire_Com(
-                    m_shooter,
-                    m_vision,
-                    controller,
-                    hdssm,
-                    () -> -tunedJoystick.getLeftY() * MaxSpeed * auto_aim_speed_modifier, // vx lambda
-                    () -> -tunedJoystick.getLeftX() * MaxSpeed * auto_aim_speed_modifier // vy lambda
-                ),
-                new SequentialCommandGroup(
-                    new WaitCommand(0.25),
-                    new HopperPercent_Com(m_hopper, 1.0)
-                ),
-                new SequentialCommandGroup(
-                    new WaitCommand(1.5),
-                    new ToggleIntakePosition(m_intakepivot, true)
-                )
-            )
-        );
+                new ParallelCommandGroup(
+                        // Shooting and auto-aiming runs uninterrupted
+                        new autoRangeFire_Com(
+                                m_shooter,
+                                m_vision,
+                                controller,
+                                hdssm,
+                                () -> -tunedJoystick.getLeftY() * MaxSpeed * auto_aim_speed_modifier, // vx lambda
+                                () -> -tunedJoystick.getLeftX() * MaxSpeed * auto_aim_speed_modifier // vy lambda
+                        ),
+                        // Hopper spins after a small delay
+                        new SequentialCommandGroup(
+                                new WaitCommand(0.25),
+                                new HopperPercent_Com(m_hopper, 1.0)),
+                        // Toggle intake runs independently after 1.2 seconds
+                        new SequentialCommandGroup(
+                                new WaitCommand(0.8),
+                                new InstantCommand(() -> edu.wpi.first.wpilibj2.command.CommandScheduler.getInstance()
+                                        .schedule(new ToggleIntakePosition(m_intakepivot, true))))));
 
         controller.pov(0).onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 2750.0));
         controller.pov(180).onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 0.0));
