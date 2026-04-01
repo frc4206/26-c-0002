@@ -42,13 +42,13 @@ public class VisionSub extends SubsystemBase {
 
     private final Transform3d robotToCam = new Transform3d(
             new Translation3d(0.0381, 0.0, 0.47), // x:forward, y:left, z:up This is how far away in meters the camera
-                                                    // is from the pigeon
+                                                  // is from the pigeon
             new Rotation3d(0.0, Math.toRadians(-16.1), 0.0) // this is for the backcam
     );
 
     public InterpolatingDoubleTreeMap hdssm;
     public InterpolatingDoubleTreeMap hdftm;
-    
+
     private final CommandSwerveDrivetrain m_drivetrain;
 
     public VisionSub(CommandSwerveDrivetrain drivetrain, PhotonCamera frontcam) {
@@ -78,6 +78,11 @@ public class VisionSub extends SubsystemBase {
 
         // Always use the most recent frame
         var result = results.get(results.size() - 1);
+
+        // Only store if there are targets
+        if (result.hasTargets()) {
+            latestResult = result; // store the most recent valid result
+        }
 
         if (!result.hasTargets())
             return;
