@@ -61,22 +61,58 @@ public class VisionSub extends SubsystemBase {
         camera = frontcam;
         m_drivetrain = drivetrain;
 
-        // photonEstimator = new PhotonPoseEstimator(
-        // fieldLayout,
-        // robotToCam);
-
     }
 
     public void setAprilTagField(AprilTagFieldLayout atfl) {
         this.fieldLayout = atfl;
+
+        photonPoseEstimator = new PhotonPoseEstimator(
+                fieldLayout,
+                PhotonPoseEstimator.PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR,
+                robotToCam);
+
+        photonPoseEstimator.setMultiTagFallbackStrategy(
+                PhotonPoseEstimator.PoseStrategy.LOWEST_AMBIGUITY);
     }
 
     @Override
     public void periodic() {
         var results = camera.getAllUnreadResults();
-        if (!results.isEmpty()) {
-            latestResult = results.get(results.size() - 1);
-        }
+
+        if (results.isEmpty())
+            return;
+
+        // Always use the most recent frame
+        var result = results.get(results.size() - 1);
+
+        if (!result.hasTargets())
+            return;
+
+        // Get estimated robot pose from PhotonVision
+        var estimatedPoseOpt = photonPoseEstimator.update(result);
+
+        if (estimatedPoseOpt.isEmpty())
+            return;
+
+        var estimatedPose = estimatedPoseOpt.get();
+
+        Pose2d visionPose = estimatedPose.estimatedPose.toPose2d();
+        double timestamp = estimatedPose.timestampSeconds;
+
+        // 🔎 Optional: reject bad measurements
+        var bestTarget = result.getBestTarget();
+        boolean isGoodMeasurement = result.getTargets().size() >= 2 ||
+                bestTarget.getPoseAmbiguity() < 0.2;
+
+        if (!isGoodMeasurement)
+            return;
+
+        // 🚀 THIS is the important line
+        m_drivetrain.addVisionMeasurement(visionPose, timestamp);
+
+        // (Optional) Logging for AdvantageScope
+        Logger.recordOutput("Vision/Pose", visionPose);
+        Logger.recordOutput("Vision/Ambiguity", bestTarget.getPoseAmbiguity());
     }
 
     public boolean hasTarget() {

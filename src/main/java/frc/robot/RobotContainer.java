@@ -189,6 +189,8 @@ public class RobotContainer {
 
     private void configureBindings() {
 
+        double auto_aim_speed_modifier = 0.3d;
+
         drivetrain.setDefaultCommand(
                 // Drivetrain will execute this command periodically
                 drivetrain.applyRequest(() -> drive.withVelocityX(-tunedJoystick.getLeftY() * MaxSpeed)
@@ -197,8 +199,8 @@ public class RobotContainer {
 
         controller.leftTrigger().whileTrue(
                 drivetrain.applyRequest(() -> {
-                    double vx = -tunedJoystick.getLeftY() * MaxSpeed * 0.1;
-                    double vy = -tunedJoystick.getLeftX() * MaxSpeed * 0.1;
+                    double vx = -tunedJoystick.getLeftY() * MaxSpeed * auto_aim_speed_modifier;
+                    double vy = -tunedJoystick.getLeftX() * MaxSpeed * auto_aim_speed_modifier;
 
                     double omega = m_vision.getRotationToHub(drivetrain, vx, vy, hdftm)
                             * MaxAngularRate;
@@ -214,8 +216,8 @@ public class RobotContainer {
                         m_vision,
                         controller,
                         hdssm,
-                        () -> -tunedJoystick.getLeftY() * MaxSpeed * 0.3, // vx lambda
-                        () -> -tunedJoystick.getLeftX() * MaxSpeed * 0.3 // vy lambda
+                        () -> -tunedJoystick.getLeftY() * MaxSpeed * auto_aim_speed_modifier, // vx lambda
+                        () -> -tunedJoystick.getLeftX() * MaxSpeed * auto_aim_speed_modifier // vy lambda
                 ),
                 new SequentialCommandGroup(
                         new WaitCommand(0.25),
