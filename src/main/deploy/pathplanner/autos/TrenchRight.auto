@@ -5,19 +5,13 @@
     "data": {
       "commands": [
         {
-          "type": "path",
-          "data": {
-            "pathName": "BasicRight.1"
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
               {
                 "type": "named",
                 "data": {
-                  "name": "Flywheels"
+                  "name": "FlywheelsTrench"
                 }
               },
               {
@@ -49,7 +43,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "BasicRight.2"
+                  "pathName": "TrenchRight1"
                 }
               },
               {
@@ -59,7 +53,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 2.0
+                        "waitTime": 1.0
                       }
                     },
                     {
@@ -74,7 +68,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "RunIntakeRollers"
+                  "name": "RollersShort"
                 }
               }
             ]
@@ -87,13 +81,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "BasicRight.4"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "RunIntakeRollers"
+                  "pathName": "TrenchRight.2"
                 }
               }
             ]
@@ -144,7 +132,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "BasicRight.5"
+                  "pathName": "TrenchRight.3"
                 }
               },
               {
@@ -154,7 +142,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 2.0
+                        "waitTime": 1.0
                       }
                     },
                     {
@@ -167,19 +155,57 @@
                 }
               },
               {
+                "type": "named",
+                "data": {
+                  "name": "RollersShort"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "TrenchRight.4"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "FlywheelsTrench"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "PivotUp"
+                }
+              },
+              {
                 "type": "sequential",
                 "data": {
                   "commands": [
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 1.5
+                        "waitTime": 0.5
                       }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "RunIntakeRollers"
+                        "name": "Hopper"
                       }
                     }
                   ]

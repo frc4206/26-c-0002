@@ -3,32 +3,37 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.271193181818181,
-        "y": 0.9017272727272734
+        "x": 3.9205227272727265,
+        "y": 7.529011363636364
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.672236135957066,
-        "y": 0.9927370304114483
+        "x": 7.259931818181818,
+        "y": 7.230113636363637
       },
       "isLocked": false,
-      "linkedName": "HP.1"
+      "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.9258676207513417,
-        "y": 1.236118067978532
+        "x": 7.579443181818181,
+        "y": 4.663715909090908
       },
       "prevControl": {
-        "x": 2.4126296958855096,
-        "y": 1.0414132379248655
+        "x": 7.600056818181818,
+        "y": 8.240181818181817
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "TrenchLeft.1"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.5,
+      "rotationDegrees": -90.0
+    }
+  ],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [],
@@ -42,13 +47,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 86.56636963754947
+    "rotation": -90.0
   },
   "reversed": false,
-  "folder": "HP",
+  "folder": "TrenchLeft",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 20.556045219583424
+    "rotation": -86.30861401354872
   },
   "useDefaultConstraints": true
 }

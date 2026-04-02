@@ -5,19 +5,13 @@
     "data": {
       "commands": [
         {
-          "type": "path",
-          "data": {
-            "pathName": "BasicRight.1"
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
               {
                 "type": "named",
                 "data": {
-                  "name": "Flywheels"
+                  "name": "FlywheelsTrench"
                 }
               },
               {
@@ -49,7 +43,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "BasicRight.2"
+                  "pathName": "TrenchLeft.1"
                 }
               },
               {
@@ -59,7 +53,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 2.0
+                        "waitTime": 1.0
                       }
                     },
                     {
@@ -74,7 +68,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "RunIntakeRollers"
+                  "name": "RollersShort"
                 }
               }
             ]
@@ -87,13 +81,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "BasicRight.4"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "RunIntakeRollers"
+                  "pathName": "TrenchLeft.2"
                 }
               }
             ]
@@ -110,9 +98,92 @@
                 }
               },
               {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.5
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Hopper"
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "PivotUp"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "TrenchLeft.3"
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 1.0
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "PivotDown"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
                 "type": "named",
                 "data": {
-                  "name": "PivotUp"
+                  "name": "RollersShort"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "TrenchLeft.4"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "FlywheelsTrench"
                 }
               },
               {
@@ -130,56 +201,11 @@
                       "data": {
                         "name": "Hopper"
                       }
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "BasicRight.5"
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 2.0
-                      }
                     },
                     {
                       "type": "named",
                       "data": {
-                        "name": "PivotDown"
-                      }
-                    }
-                  ]
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 1.5
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "RunIntakeRollers"
+                        "name": "PivotUp"
                       }
                     }
                   ]

@@ -45,6 +45,7 @@ import frc.robot.commands.IncrementSpeedUp_Com;
 // import frc.robot.commands.IntakeJoystick_Com;
 import frc.robot.commands.SetFlywheelSpeed_Com;
 import frc.robot.commands.ToggleIntakePosition;
+import frc.robot.commands.IntakePivotToPosition;
 import frc.robot.commands.autoRangeFire_Com;
 import frc.robot.commands.PercentCommands.HopperPercent_Com;
 import frc.robot.commands.PercentCommands.IntakePercent_Com;
@@ -79,10 +80,12 @@ public class RobotContainer {
     final ClimberSub m_climber = new ClimberSub(m_climberConfig);
     final HopperSub m_hopper = new HopperSub(m_hopperConfig);
 
-    private final CommandXboxController controller = new CommandXboxController(0);
+    
+    private final CommandXboxController driverController = new CommandXboxController(0);
+    private final CommandXboxController operatorController = new CommandXboxController(1); 
 
     // then use the same controller handle
-    TunedJoystick tunedJoystick = new TunedJoystick(controller.getHID())
+    TunedJoystick tunedJoystick = new TunedJoystick(driverController.getHID())
             .useResponseCurve(ResponseCurve.SOFT)
             .setDeadzone(0.1d);
 
@@ -121,19 +124,16 @@ public class RobotContainer {
         initHubDistanceFlightTimeMap();
 
         /* Pathplanner Named Commands */
-        /* Basic: */
-        NamedCommands.registerCommand("Hopper", new HopperPercent_Com(m_hopper, 0.80).withTimeout(2.5));
-        NamedCommands.registerCommand("Flywheels",
-                new SetFlywheelSpeed_Com(m_shooter, () -> 1775).withTimeout(4.5));
+        /* Basic */
+        NamedCommands.registerCommand("Hopper", new HopperPercent_Com(m_hopper, 0.75).withTimeout(1.5));
+        NamedCommands.registerCommand("Flywheels", new SetFlywheelSpeed_Com(m_shooter, () -> 1775).withTimeout(2.0));
+        NamedCommands.registerCommand("PivotDown", new IntakePivotToPosition(m_intakepivot, -3.0).withTimeout(0.5));
+        NamedCommands.registerCommand("RunIntakeRollers", new IntakePercent_Com(m_intakeroller, 0.35).withTimeout(4.0)); 
+        NamedCommands.registerCommand("PivotUp", new IntakePivotToPosition(m_intakepivot, 0.0).withTimeout(2.0));
+        NamedCommands.registerCommand("FlywheelsTrench", new SetFlywheelSpeed_Com(m_shooter, () -> 2300).withTimeout(2.0));
 
-        /* Human Player Auto: */
-        NamedCommands.registerCommand("FlywheelsTrench",
-                new ShooterPercent_Com(m_shooter, .51).withTimeout(5.0));
-        NamedCommands.registerCommand("HopperShort", new HopperPercent_Com(m_hopper, 0.90).withTimeout(5));
-
-        /* Depot Auto */
-        NamedCommands.registerCommand("IntakeOut", new ToggleIntakePosition(m_intakepivot, false));
-        NamedCommands.registerCommand("IntakeFuel", new IntakePercent_Com(m_intakeroller, 0.45));
+        /* Trench */
+        NamedCommands.registerCommand("RollersShort", new IntakePercent_Com(m_intakeroller, 0.35).withTimeout(3.0)); 
 
         // camera = new PhotonCamera("frontcam");
 
@@ -191,13 +191,14 @@ public class RobotContainer {
 
         double auto_aim_speed_modifier = 0.4d;
 
+        /* Driver */
         drivetrain.setDefaultCommand(
                 // Drivetrain will execute this command periodically
                 drivetrain.applyRequest(() -> drive.withVelocityX(-tunedJoystick.getLeftY() * MaxSpeed)
                         .withVelocityY(-tunedJoystick.getLeftX() * MaxSpeed)
                         .withRotationalRate(-tunedJoystick.getRightX() * MaxAngularRate)));
 
-        controller.leftTrigger().whileTrue(
+        driverController.leftTrigger().whileTrue(
                 drivetrain.applyRequest(() -> {
                     double vx = -tunedJoystick.getLeftY() * MaxSpeed * auto_aim_speed_modifier;
                     double vy = -tunedJoystick.getLeftX() * MaxSpeed * auto_aim_speed_modifier;
@@ -210,13 +211,13 @@ public class RobotContainer {
                             .withRotationalDeadband(0);
                 }));
 
-        controller.rightTrigger().whileTrue(
+        operatorController.rightTrigger().whileTrue(
                 new ParallelCommandGroup(
                         // Shooting and auto-aiming runs uninterrupted
                         new autoRangeFire_Com(
                                 m_shooter,
                                 m_vision,
-                                controller,
+                                driverController,
                                 hdssm,
                                 () -> -tunedJoystick.getLeftY() * MaxSpeed * auto_aim_speed_modifier, // vx lambda
                                 () -> -tunedJoystick.getLeftX() * MaxSpeed * auto_aim_speed_modifier // vy lambda
@@ -231,16 +232,21 @@ public class RobotContainer {
                                 new InstantCommand(() -> edu.wpi.first.wpilibj2.command.CommandScheduler.getInstance()
                                         .schedule(new ToggleIntakePosition(m_intakepivot, true))))));
 
-        controller.pov(0).onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 2750.0));
-        controller.pov(180).onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 0.0));
 
-        controller.leftBumper().toggleOnTrue(new ToggleIntakePosition(m_intakepivot, false));
-        controller.rightBumper().toggleOnTrue(new IntakePercent_Com(m_intakeroller, 1.0));
 
-        controller.a().onTrue(drivetrain.runOnce(() -> {
+        driverController.b().toggleOnTrue(new ToggleIntakePosition(m_intakepivot, false));
+        driverController.rightTrigger().toggleOnTrue(new IntakePercent_Com(m_intakeroller, 1.0));
+
+        driverController.a().onTrue(drivetrain.runOnce(() -> {
             drivetrain.seedFieldCentric();
             drivetrain.getPigeon2().reset();
         }));
+
+        /* Operator */
+        operatorController.pov(0).onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 2750.0)); //up on dpad - to shoot from corner
+        operatorController.y().onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 0.0)); 
+        operatorController.a().onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 2000)); //to shoot from general radius 
+
     }
 
     public Command getAutonomousCommand() {

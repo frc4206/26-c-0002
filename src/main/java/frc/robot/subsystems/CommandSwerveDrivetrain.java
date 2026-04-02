@@ -71,10 +71,6 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
     private final SwerveRequest.SysIdSwerveSteerGains m_steerCharacterization = new SwerveRequest.SysIdSwerveSteerGains();
     private final SwerveRequest.SysIdSwerveRotation m_rotationCharacterization = new SwerveRequest.SysIdSwerveRotation(); 
 
-    //Pathplanner stuff
-    private Odometry odo = new Odometry(this.getKinematics(), getPose().getRotation(), this.getState().ModulePositions, getPose()); 
-    private final PoseEstimator poseEstimator = new PoseEstimator<>(getKinematics(), odo, VecBuilder.fill(0.1,0.1,0.1), VecBuilder.fill(.7,.7,99999));
-
     /* SysId routine for characterizing translation. This is used to find PID gains for the drive motors. */
     private final SysIdRoutine m_sysIdRoutineTranslation = new SysIdRoutine(
         new SysIdRoutine.Config(
@@ -168,8 +164,8 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
 
     // Configure AutoBuilder last
     AutoBuilder.configure(
-            this::getEstimatedPose, // Robot pose supplier
-            this::resetPoseEstimator, // Method to reset odometry (will be called if your auto has a starting pose)
+            this::getPose, // Robot pose supplier
+            this::resetPose, // Method to reset odometry (will be called if your auto has a starting pose)
             this::getRobotRelativeSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
             (speeds, feedforwards) -> driveRobotRelative(speeds), // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds. Also optionally outputs individual module feedforwards
             new PPHolonomicDriveController( // PPHolonomicController is the built in path following controller for holonomic drive trains
@@ -226,13 +222,13 @@ public class CommandSwerveDrivetrain extends TunerSwerveDrivetrain implements Su
         super.resetPose(newPose); 
     }
 
-    public Pose2d getEstimatedPose() {
-        return poseEstimator.getEstimatedPosition(); 
-    }
+    // public Pose2d getEstimatedPose() {
+    //     return poseEstimator.getEstimatedPosition(); 
+    // }
 
-    public void resetPoseEstimator(Pose2d newPose) {
-        poseEstimator.resetPose(newPose);
-    }
+    // public void resetPoseEstimator(Pose2d newPose) {
+    //     poseEstimator.resetPose(newPose);
+    // }
 
     public ChassisSpeeds getRobotRelativeSpeeds() {
         return this.getKinematics().toChassisSpeeds(this.getState().ModuleStates); 
