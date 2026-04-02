@@ -235,7 +235,7 @@ public class RobotContainer {
         controller.pov(180).onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 0.0));
 
         controller.leftBumper().toggleOnTrue(new ToggleIntakePosition(m_intakepivot, false));
-        controller.rightBumper().toggleOnTrue(new IntakePercent_Com(m_intakeroller, .45));
+        controller.rightBumper().toggleOnTrue(new IntakePercent_Com(m_intakeroller, 1.0));
 
         controller.a().onTrue(drivetrain.runOnce(() -> {
             drivetrain.seedFieldCentric();
