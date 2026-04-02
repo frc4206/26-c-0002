@@ -98,6 +98,12 @@
                 }
               },
               {
+                "type": "named",
+                "data": {
+                  "name": "PivotUp"
+                }
+              },
+              {
                 "type": "sequential",
                 "data": {
                   "commands": [
@@ -111,12 +117,6 @@
                       "type": "named",
                       "data": {
                         "name": "Hopper"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "PivotUp"
                       }
                     }
                   ]
@@ -187,6 +187,12 @@
                 }
               },
               {
+                "type": "named",
+                "data": {
+                  "name": "PivotUp"
+                }
+              },
+              {
                 "type": "sequential",
                 "data": {
                   "commands": [
@@ -200,12 +206,6 @@
                       "type": "named",
                       "data": {
                         "name": "Hopper"
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "PivotUp"
                       }
                     }
                   ]

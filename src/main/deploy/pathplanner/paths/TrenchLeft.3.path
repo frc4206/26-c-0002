@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.023590909090909,
-        "y": 7.498090909090909
+        "x": 3.3845681818181816,
+        "y": 7.374409090909092
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.4972272727272715,
-        "y": 7.601159090909091
+        "x": 6.126181818181817,
+        "y": 7.508397727272728
       },
       "isLocked": false,
       "linkedName": "TrenchLeft.2"
@@ -20,8 +20,8 @@
         "y": 4.735863636363637
       },
       "prevControl": {
-        "x": 6.033420454545454,
-        "y": 7.72484090909091
+        "x": 6.2292499999999995,
+        "y": 7.735147727272727
       },
       "nextControl": null,
       "isLocked": false,
@@ -53,7 +53,7 @@
   "folder": "TrenchLeft",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -87.39743779750019
+    "rotation": -78.11134196037209
   },
   "useDefaultConstraints": true
 }

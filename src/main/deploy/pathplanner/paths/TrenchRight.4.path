@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.486920454545454,
-        "y": 1.7675
+        "x": 5.662375,
+        "y": 1.365534090909091
       },
       "isLocked": false,
       "linkedName": "TrenchRight.3"
     },
     {
       "anchor": {
-        "x": 3.405181818181818,
-        "y": 0.6749772727272727
+        "x": 3.106284090909091,
+        "y": 0.6852840909090911
       },
       "prevControl": {
-        "x": 6.239556818181818,
-        "y": 0.22147727272727358
+        "x": 9.187306818181822,
+        "y": 0.02564772727272724
       },
       "nextControl": null,
       "isLocked": false,
@@ -35,6 +35,10 @@
     },
     {
       "waypointRelativePos": 0.75,
+      "rotationDegrees": 90.0
+    },
+    {
+      "waypointRelativePos": 0.9800747198007491,
       "rotationDegrees": 90.0
     }
   ],
@@ -51,7 +55,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 69.30454926593676
+    "rotation": 56.976132444203444
   },
   "reversed": false,
   "folder": "TrenchRight",
