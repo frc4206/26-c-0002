@@ -211,7 +211,21 @@ public class RobotContainer {
                             .withRotationalDeadband(0);
                 }));
 
-        operatorController.rightTrigger().whileTrue(
+        driverController.b().toggleOnTrue(new ToggleIntakePosition(m_intakepivot, false));
+        driverController.rightTrigger().toggleOnTrue(new IntakePercent_Com(m_intakeroller, 1.0));
+
+        driverController.a().onTrue(drivetrain.runOnce(() -> {
+            drivetrain.seedFieldCentric();
+            drivetrain.getPigeon2().reset();
+        }));
+
+        /* Operator */
+        operatorController.pov(0).onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 2750.0)); //up on dpad - to shoot from corner
+        operatorController.y().onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 0.0)); 
+        operatorController.a().onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 2000)); //to shoot from general radius 
+        operatorController.rightTrigger().toggleOnTrue(new HopperPercent_Com(m_hopper, 1.0)); 
+
+        operatorController.leftTrigger().whileTrue(
                 new ParallelCommandGroup(
                         // Shooting and auto-aiming runs uninterrupted
                         new autoRangeFire_Com(
@@ -225,28 +239,16 @@ public class RobotContainer {
                         // Hopper spins after a small delay
                         new SequentialCommandGroup(
                                 new WaitCommand(0.25),
-                                new HopperPercent_Com(m_hopper, 1.0)),
+                                new HopperPercent_Com(m_hopper, 1.0))
+                        //intake is out of the sequence bc it's slow and we like controlling it pls don't freak out this was on purpose
                         // Toggle intake runs independently after 1.2 seconds
-                        new SequentialCommandGroup(
-                                new WaitCommand(0.8),
-                                new InstantCommand(() -> edu.wpi.first.wpilibj2.command.CommandScheduler.getInstance()
-                                        .schedule(new ToggleIntakePosition(m_intakepivot, true))))));
+                        // new SequentialCommandGroup(
+                        //         new WaitCommand(0.8),
+                        //         new InstantCommand(() -> edu.wpi.first.wpilibj2.command.CommandScheduler.getInstance()
+                        //                 .schedule(new ToggleIntakePosition(m_intakepivot, true)))
+                        ));
 
-
-
-        driverController.b().toggleOnTrue(new ToggleIntakePosition(m_intakepivot, false));
-        driverController.rightTrigger().toggleOnTrue(new IntakePercent_Com(m_intakeroller, 1.0));
-
-        driverController.a().onTrue(drivetrain.runOnce(() -> {
-            drivetrain.seedFieldCentric();
-            drivetrain.getPigeon2().reset();
-        }));
-
-        /* Operator */
-        operatorController.pov(0).onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 2750.0)); //up on dpad - to shoot from corner
-        operatorController.y().onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 0.0)); 
-        operatorController.a().onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 2000)); //to shoot from general radius 
-
+        
     }
 
     public Command getAutonomousCommand() {
