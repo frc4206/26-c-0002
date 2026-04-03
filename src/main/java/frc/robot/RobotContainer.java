@@ -127,10 +127,10 @@ public class RobotContainer {
         /* Basic */
         NamedCommands.registerCommand("Hopper", new HopperPercent_Com(m_hopper, 0.75).withTimeout(1.5));
         NamedCommands.registerCommand("Flywheels", new SetFlywheelSpeed_Com(m_shooter, () -> 1775).withTimeout(2.0));
-        NamedCommands.registerCommand("PivotDown", new IntakePivotToPosition(m_intakepivot, -3.0).withTimeout(0.5));
+        NamedCommands.registerCommand("PivotDown", new IntakePivotToPosition(m_intakepivot, -3.0).withTimeout(1.0));
         NamedCommands.registerCommand("RunIntakeRollers", new IntakePercent_Com(m_intakeroller, 0.35).withTimeout(4.0)); 
-        NamedCommands.registerCommand("PivotUp", new IntakePivotToPosition(m_intakepivot, 0.0).withTimeout(2.0));
-        NamedCommands.registerCommand("FlywheelsTrench", new SetFlywheelSpeed_Com(m_shooter, () -> 2150).withTimeout(2.0));
+        NamedCommands.registerCommand("PivotUp", new IntakePivotToPosition(m_intakepivot, 0.0).withTimeout(2.5));
+        NamedCommands.registerCommand("FlywheelsTrench", new SetFlywheelSpeed_Com(m_shooter, () -> 2000).withTimeout(2.0));
 
         /* Trench */
         NamedCommands.registerCommand("RollersShort", new IntakePercent_Com(m_intakeroller, 0.35).withTimeout(3.0)); 
@@ -145,12 +145,12 @@ public class RobotContainer {
 
     public void initHubDistanceShooterSpeedMap() {
         // gotta rebuild the table
-        hdssm.put(1.4, 1670.0); // TIME TO FLIGHT: 0.7825
-        hdssm.put(2.1, 1870.0); // TIME TO FLIGHT: 0.9250
-        hdssm.put(2.9, 2020.0); // TIME TO FLIGHT: 0.9625
-        hdssm.put(3.5, 2220.0); // TIME TO FLIGHT: 1.0750
-        hdssm.put(4.0, 2420.0); // TIME TO FLIGHT: 1.1750
-        hdssm.put(5.0, 2820.0); // TIME TO FLIGHT: 1.2375
+        hdssm.put(1.4, 1440.0); // TIME TO FLIGHT: 0.7825 //1620.0 
+        hdssm.put(2.1, 1640.0); // TIME TO FLIGHT: 0.9250 //1820.0
+        hdssm.put(2.9, 1800.0); // TIME TO FLIGHT: 0.9625 //1980.0
+        hdssm.put(3.5, 2000.0); // TIME TO FLIGHT: 1.0750 //2180.0
+        hdssm.put(4.0, 2200.0); // TIME TO FLIGHT: 1.1750 //2380.0
+        hdssm.put(5.0, 2600.0); // TIME TO FLIGHT: 1.2375 //2780.0
 
         m_vision.hdssm = this.hdssm;
     }
@@ -212,7 +212,7 @@ public class RobotContainer {
                 }));
 
         driverController.b().toggleOnTrue(new ToggleIntakePosition(m_intakepivot, false));
-        driverController.rightTrigger().toggleOnTrue(new IntakePercent_Com(m_intakeroller, 1.0));
+        driverController.rightTrigger().toggleOnTrue(new IntakePercent_Com(m_intakeroller, 0.6));
 
         driverController.a().onTrue(drivetrain.runOnce(() -> {
             drivetrain.seedFieldCentric();
@@ -223,7 +223,7 @@ public class RobotContainer {
         operatorController.pov(0).onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 2750.0)); //up on dpad - to shoot from corner
         operatorController.y().onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 0.0)); 
         operatorController.a().onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 2000)); //to shoot from general radius 
-        operatorController.rightTrigger().toggleOnTrue(new HopperPercent_Com(m_hopper, 1.0)); 
+        operatorController.rightTrigger().toggleOnTrue(new HopperPercent_Com(m_hopper, 0.8)); 
 
         operatorController.leftTrigger().whileTrue(
                 new ParallelCommandGroup(

@@ -37,6 +37,12 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "PivotDown"
+          }
+        },
+        {
           "type": "parallel",
           "data": {
             "commands": [
@@ -44,25 +50,6 @@
                 "type": "path",
                 "data": {
                   "pathName": "TrenchRight1"
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 1.0
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "PivotDown"
-                      }
-                    }
-                  ]
                 }
               },
               {
@@ -126,6 +113,12 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "PivotDown"
+          }
+        },
+        {
           "type": "parallel",
           "data": {
             "commands": [
@@ -133,25 +126,6 @@
                 "type": "path",
                 "data": {
                   "pathName": "TrenchRight.3"
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 1.0
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "PivotDown"
-                      }
-                    }
-                  ]
                 }
               },
               {

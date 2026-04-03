@@ -28,6 +28,7 @@ import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.wpilibj.DataLogManager;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -73,6 +74,7 @@ public class Robot extends LoggedRobot {
         Logger.addDataReceiver(new NT4Publisher()); // live NT view (optional)
 
         Logger.start();
+        RobotController.setBrownoutVoltage(6.4); 
     }
 
     @Override

@@ -45,13 +45,13 @@ public class HopperSub extends SubsystemBase {
 
     motor1Config.CurrentLimits.SupplyCurrentLimit = 30;
     motor1Config.CurrentLimits.SupplyCurrentLimitEnable = true; 
-    motor1Config.CurrentLimits.StatorCurrentLimit = 60;
+    motor1Config.CurrentLimits.StatorCurrentLimit = 40;
     motor1Config.CurrentLimits.StatorCurrentLimitEnable = true; 
     hopperMotor1.getConfigurator().apply(motor1Config);
 
     motor2Config.CurrentLimits.SupplyCurrentLimit = 30;
     motor2Config.CurrentLimits.SupplyCurrentLimitEnable = true; 
-    motor2Config.CurrentLimits.StatorCurrentLimit = 60;
+    motor2Config.CurrentLimits.StatorCurrentLimit = 40;
     motor2Config.CurrentLimits.StatorCurrentLimitEnable = true; 
     hopperMotor2.getConfigurator().apply(motor2Config);
   }

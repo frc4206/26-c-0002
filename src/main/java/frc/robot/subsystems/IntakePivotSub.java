@@ -28,9 +28,9 @@ public class IntakePivotSub extends SubsystemBase {
     TalonFXConfiguration intakePivotConfig = new TalonFXConfiguration();
 
     public IntakePivotSub() {
-        intakePivotConfig.CurrentLimits.SupplyCurrentLimit = 20;
+        intakePivotConfig.CurrentLimits.SupplyCurrentLimit = 30;
         intakePivotConfig.CurrentLimits.SupplyCurrentLimitEnable = true;
-        intakePivotConfig.CurrentLimits.StatorCurrentLimit = 60;
+        intakePivotConfig.CurrentLimits.StatorCurrentLimit = 120;
         intakePivotConfig.CurrentLimits.StatorCurrentLimitEnable = true;
         intakePivotMotor.getConfigurator().apply(intakePivotConfig);
         

@@ -41,9 +41,9 @@ public class VisionSub extends SubsystemBase {
     private AprilTagFieldLayout fieldLayout;
 
     private final Transform3d robotToCam = new Transform3d(
-            new Translation3d(0.0381, 0.0, 0.47), // x:forward, y:left, z:up This is how far away in meters the camera
+            new Translation3d(0.0381, 0.0, 0.48895), // x:forward, y:left, z:up This is how far away in meters the camera
                                                   // is from the pigeon
-            new Rotation3d(0.0, Math.toRadians(-16.1), 0.0) // this is for the backcam
+            new Rotation3d(0.0, Math.toRadians(-21.8), 0.0) // this is for the backcam
     );
 
     public InterpolatingDoubleTreeMap hdssm;
