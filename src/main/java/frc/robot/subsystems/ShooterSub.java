@@ -79,9 +79,9 @@ public class ShooterSub extends SubsystemBase {
     motor1config.Slot0.kI = 0.0d;
     motor1config.Slot0.kD = 0.0d;
     motor1config.MotorOutput.NeutralMode = NeutralModeValue.Brake;
-    motor1config.CurrentLimits.SupplyCurrentLimit = 80;
+    motor1config.CurrentLimits.SupplyCurrentLimit = 60;
     motor1config.CurrentLimits.SupplyCurrentLimitEnable = true;
-    motor1config.CurrentLimits.StatorCurrentLimit = 130;
+    motor1config.CurrentLimits.StatorCurrentLimit = 120;
     motor1config.CurrentLimits.StatorCurrentLimitEnable = true;
 
     motor1config.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
@@ -93,9 +93,9 @@ public class ShooterSub extends SubsystemBase {
     motor2config.Slot0.kI = 0.0d;
     motor2config.Slot0.kD = 0.0d;
     motor2config.MotorOutput.NeutralMode = NeutralModeValue.Brake;
-    motor2config.CurrentLimits.SupplyCurrentLimit = 80;
+    motor2config.CurrentLimits.SupplyCurrentLimit = 60;
     motor2config.CurrentLimits.SupplyCurrentLimitEnable = true;
-    motor2config.CurrentLimits.StatorCurrentLimit = 130;
+    motor2config.CurrentLimits.StatorCurrentLimit = 120;
     motor2config.CurrentLimits.StatorCurrentLimitEnable = true;
 
     motor2config.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
