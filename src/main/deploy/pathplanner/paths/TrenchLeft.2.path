@@ -32,6 +32,10 @@
     {
       "waypointRelativePos": 0.5479452054794522,
       "rotationDegrees": -90.0
+    },
+    {
+      "waypointRelativePos": 0.954216867469881,
+      "rotationDegrees": -90.0
     }
   ],
   "constraintZones": [],
@@ -47,7 +51,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -78.11134196037209
+    "rotation": -73.53998518796004
   },
   "reversed": false,
   "folder": "TrenchLeft",

@@ -8,7 +8,7 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.126181818181817,
+        "x": 6.126181818181816,
         "y": 7.508397727272728
       },
       "isLocked": false,
@@ -53,7 +53,7 @@
   "folder": "TrenchLeft",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -78.11134196037209
+    "rotation": -73.53998518796004
   },
   "useDefaultConstraints": true
 }

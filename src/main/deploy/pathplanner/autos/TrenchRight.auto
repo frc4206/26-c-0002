@@ -85,12 +85,6 @@
                 }
               },
               {
-                "type": "named",
-                "data": {
-                  "name": "PivotUp"
-                }
-              },
-              {
                 "type": "sequential",
                 "data": {
                   "commands": [
@@ -104,6 +98,25 @@
                       "type": "named",
                       "data": {
                         "name": "Hopper"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 1.25
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "PivotUp"
                       }
                     }
                   ]
@@ -132,57 +145,6 @@
                 "type": "named",
                 "data": {
                   "name": "RollersShort"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "TrenchRight.4"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "FlywheelsTrench"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "PivotUp"
-                }
-              },
-              {
-                "type": "sequential",
-                "data": {
-                  "commands": [
-                    {
-                      "type": "wait",
-                      "data": {
-                        "waitTime": 0.5
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Hopper"
-                      }
-                    }
-                  ]
                 }
               }
             ]

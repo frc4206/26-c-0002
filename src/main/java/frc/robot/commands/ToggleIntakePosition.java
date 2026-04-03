@@ -7,10 +7,10 @@ public class ToggleIntakePosition extends Command {
     private final IntakePivotSub intake;
     private static boolean isDeployed = false; // static so it persists between command instances
 
-    private static final double STOWED = 0.0;
+    private static final double STOWED = 0.0; //0.0
     private static final double DEPLOYED = -3.1;
     private static final double TOLERANCE_STOWED = 0.3;
-    private static final double TOLERANCE_DEPLOYED = 0.3;
+    private static final double TOLERANCE_DEPLOYED = 0.3; //0.3
 
     private double target;
     private boolean stow_only;
@@ -39,7 +39,8 @@ public class ToggleIntakePosition extends Command {
         } else {
             // Normal toggle: deploy if stowed, stow if deployed
             target = isDeployed ? STOWED : DEPLOYED;
-            intake.setPositionOfIntakePivot(target);
+            // intake.setPositionOfIntakePivot(target);
+            intake.setPosOfIntakeSlot1(target);
             System.out.println("TOGGLE: Moving to " + target);
             System.out.println("MOTOR IS AT: " + intake.intakePivotMotor.getPosition());
             isDeployed = !isDeployed;
