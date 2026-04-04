@@ -65,7 +65,7 @@ public class RobotContainer {
     public final ClimberSub.Config m_climberConfig = new ClimberSub.Config("Climber.toml");
     public final HopperSub.Config m_hopperConfig = new HopperSub.Config("Hopper.toml");
 
-    private final IntakePivotSub m_intakepivot = new IntakePivotSub();
+    final IntakePivotSub m_intakepivot = new IntakePivotSub();
 
     private final IntakeRollerSub m_intakeroller = new IntakeRollerSub();
 
@@ -220,6 +220,8 @@ public class RobotContainer {
             drivetrain.seedFieldCentric();
             drivetrain.getPigeon2().reset();
         }));
+
+        driverController.x().onTrue(new IntakePivotToPosition(m_intakepivot, 0.0)); 
 
         /* Operator */
         operatorController.pov(0).onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 2750.0)); //up on dpad - to shoot from corner

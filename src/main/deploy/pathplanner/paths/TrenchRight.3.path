@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.374261363636363,
-        "y": 0.6646704545454554
+        "x": 3.353647727272727,
+        "y": 0.6234431818181827
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.39415909090909,
-        "y": 0.5719090909090914
+        "x": 6.517840909090909,
+        "y": 0.4070000000000005
       },
       "isLocked": false,
       "linkedName": "TrenchRight.2"
@@ -20,8 +20,8 @@
         "y": 3.0558522727272726
       },
       "prevControl": {
-        "x": 6.62090909090909,
-        "y": -0.1186477272727271
+        "x": 6.827045454545454,
+        "y": -0.12895454545454532
       },
       "nextControl": null,
       "isLocked": false,
@@ -30,11 +30,11 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.059775840597757986,
+      "waypointRelativePos": 0.015068493150684896,
       "rotationDegrees": 90.0
     },
     {
-      "waypointRelativePos": 0.37733499377334945,
+      "waypointRelativePos": 0.3863013698630136,
       "rotationDegrees": 90.0
     }
   ],
