@@ -213,15 +213,17 @@ public class RobotContainer {
                             .withRotationalDeadband(0);
                 }));
 
-        driverController.b().toggleOnTrue(new ToggleIntakePosition(m_intakepivot, false));
+        // driverController.b().toggleOnTrue(new ToggleIntakePosition(m_intakepivot, false));
+        driverController.a().onTrue(new IntakePivotToPosition(m_intakepivot, 0.0)); 
+        driverController.b().onTrue(new IntakePivotToPosition(m_intakepivot, -3.1)); 
+
+
         driverController.rightTrigger().toggleOnTrue(new IntakePercent_Com(m_intakeroller, 0.6));
 
-        driverController.a().onTrue(drivetrain.runOnce(() -> {
+        driverController.x().onTrue(drivetrain.runOnce(() -> {
             drivetrain.seedFieldCentric();
             drivetrain.getPigeon2().reset();
         }));
-
-        driverController.x().onTrue(new IntakePivotToPosition(m_intakepivot, 0.0)); 
 
         /* Operator */
         operatorController.pov(0).onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 2750.0)); //up on dpad - to shoot from corner
