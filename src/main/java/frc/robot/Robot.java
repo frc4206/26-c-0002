@@ -13,6 +13,7 @@ import org.photonvision.PhotonPoseEstimator;
 import org.photonvision.targeting.PhotonTrackedTarget;
 
 import com.ctre.phoenix6.HootAutoReplay;
+import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.Pigeon2;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -33,9 +34,11 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.commands.ToggleIntakePosition;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.HopperSub;
 // import frc.robot.subsystems.IntakeSub;
+import frc.robot.subsystems.IntakePivotSub;
 import frc.robot.subsystems.ShooterSub;
 import frc.robot.subsystems.VisionSub;
 
@@ -44,6 +47,8 @@ public class Robot extends LoggedRobot {
     public double distanceToTarget; 
     private final PhotonCamera camera; 
     public PhotonTrackedTarget currentTarget; 
+
+    IntakePivotSub m_IntakePivotSub; 
 
     private final CommandXboxController m_driverController = new CommandXboxController(0);
 
@@ -81,6 +86,10 @@ public class Robot extends LoggedRobot {
     public void robotPeriodic() {
         m_timeAndJoystickReplay.update();
         CommandScheduler.getInstance().run(); 
+
+        // if(ToggleIntakePosition.isDeployed) {
+        //     m_IntakePivotSub.intakePivotMotor.setControl(new PositionVoltage(-3.1).withSlot(0));
+        // }12w
         
         // distanceToTarget = getHubY();
 
