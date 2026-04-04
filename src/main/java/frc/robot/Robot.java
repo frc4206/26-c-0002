@@ -88,8 +88,9 @@ public class Robot extends LoggedRobot {
         CommandScheduler.getInstance().run(); 
 
         // if(ToggleIntakePosition.isDeployed) {
-        //     m_IntakePivotSub.intakePivotMotor.setControl(new PositionVoltage(-3.1).withSlot(0));
-        // }12w
+        //      m_IntakePivotSub.intakePivotMotor.setControl(new PositionVoltage(0.0).withSlot(0));
+
+        // } 
         
         // distanceToTarget = getHubY();
 

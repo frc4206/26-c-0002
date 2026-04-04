@@ -39,7 +39,7 @@ public class IntakePivotSub extends SubsystemBase {
         intakePivotConfig.Slot0.kG = 1.05d;
         intakePivotConfig.Slot0.GravityType = GravityTypeValue.Arm_Cosine;
         intakePivotConfig.Feedback.RotorToSensorRatio = 9.63;
-        intakePivotConfig.Slot0.kP = 5.0; //2.0 in last match
+        intakePivotConfig.Slot0.kP = 30.0; //2.0 in last match
         intakePivotConfig.Slot0.kI = 0;
         intakePivotConfig.Slot0.kD = 0.2;
         intakePivotConfig.Slot0.kS = -0.05;
@@ -52,7 +52,7 @@ public class IntakePivotSub extends SubsystemBase {
         intakePivotConfig.Slot1.kS = -0.05; 
 
         intakePivotConfig.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
-        intakePivotConfig.MotorOutput.NeutralMode = NeutralModeValue.Coast;
+        intakePivotConfig.MotorOutput.NeutralMode = NeutralModeValue.Brake;
         intakePivotMotor.getConfigurator().apply(intakePivotConfig);
         intakePivotMotor.setPosition(0.0);
     }

@@ -66,7 +66,7 @@ public class ToggleIntakePosition extends Command {
         if (interrupted) {
             isDeployed = !isDeployed;
         }
-        intake.intakePivotMotor.set(0); // or set motor output to 0
+        // intake.intakePivotMotor.set(0); // or set motor output to 0
     }
 
     @Override

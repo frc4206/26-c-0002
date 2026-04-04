@@ -36,7 +36,7 @@ public class IntakePivotToPosition extends Command {
   @Override
   public void end(boolean interrupted) {
     //     m_intakeSub.intakePivotMotor.setControl(new DutyCycleOut(0)); 
-    m_intakePivotSub.intakePivotMotor.setControl(new DutyCycleOut(0.0));
+    // m_intakePivotSub.intakePivotMotor.setControl(new DutyCycleOut(0.0));
   }
 
   // Returns true when the command should end.
