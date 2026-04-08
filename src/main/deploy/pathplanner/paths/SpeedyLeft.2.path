@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 8.66165909090909,
-        "y": 8.023738636363635
+        "x": 8.702886363636363,
+        "y": 7.786681818181817
       },
       "isLocked": false,
       "linkedName": "SpeedyLeft.1"
@@ -42,8 +42,8 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.0,
-    "maxAcceleration": 3.0,
+    "maxVelocity": 4.5,
+    "maxAcceleration": 3.5,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -51,7 +51,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -75.25643716352933
+    "rotation": -75.25643716352934
   },
   "reversed": false,
   "folder": "SpeedyLeft",
@@ -59,5 +59,5 @@
     "velocity": 0,
     "rotation": -100.00797980144154
   },
-  "useDefaultConstraints": true
+  "useDefaultConstraints": false
 }

@@ -20,6 +20,7 @@ import frc.robot.subsystems.CommandSwerveDrivetrain;
 // https://v6.docs.ctr-electronics.com/en/stable/docs/tuner/tuner-swerve/index.html
 public class TunerConstants {
     // Both sets of gains need to be tuned to your individual robot.
+    
 
     // The steer motor uses any SwerveModule.SteerRequestType control request with the
     // output type specified by SwerveModuleConstants.SteerMotorClosedLoopOutput
@@ -110,7 +111,8 @@ public class TunerConstants {
             .withSteerMotorGains(steerGains)
             .withDriveMotorGains(driveGains)
             .withSteerMotorClosedLoopOutput(kSteerClosedLoopOutput)
-            .withDriveMotorClosedLoopOutput(kDriveClosedLoopOutput)
+            // .withDriveMotorClosedLoopOutput(kDriveClosedLoopOutput)
+            .withDriveMotorClosedLoopOutput(ClosedLoopOutputType.TorqueCurrentFOC)
             .withSlipCurrent(kSlipCurrent)
             .withSpeedAt12Volts(kSpeedAt12Volts)
             .withDriveMotorType(kDriveMotorType)
