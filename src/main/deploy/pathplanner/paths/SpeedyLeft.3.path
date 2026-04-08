@@ -1,0 +1,59 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 3.621625,
+        "y": 7.477477272727273
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 7.177477272727272,
+        "y": 8.1165
+      },
+      "isLocked": false,
+      "linkedName": "SpeedyLeft.2"
+    },
+    {
+      "anchor": {
+        "x": 5.837590909090909,
+        "y": 4.5503409090909095
+      },
+      "prevControl": {
+        "x": 5.682988636363636,
+        "y": 6.962136363636364
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "SpeedyLeft.3"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.06446540880503154,
+      "rotationDegrees": -90.0
+    }
+  ],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -89.07595464722722
+  },
+  "reversed": false,
+  "folder": "SpeedyLeft",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": -75.25643716352933
+  },
+  "useDefaultConstraints": true
+}

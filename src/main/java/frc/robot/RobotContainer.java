@@ -125,14 +125,17 @@ public class RobotContainer {
 
         /* Pathplanner Named Commands */
         /* Basic */
-        NamedCommands.registerCommand("Hopper", new HopperPercent_Com(m_hopper, 0.75).withTimeout(1.5));
+        NamedCommands.registerCommand("Hopper", new HopperPercent_Com(m_hopper, 1.0).withTimeout(1.5));
         NamedCommands.registerCommand("Flywheels", new SetFlywheelSpeed_Com(m_shooter, () -> 1775).withTimeout(2.0));
         NamedCommands.registerCommand("PivotDown", new IntakePivotToPosition(m_intakepivot, -3.0).withTimeout(1.5));
-        NamedCommands.registerCommand("RunIntakeRollers", new IntakePercent_Com(m_intakeroller, 0.35).withTimeout(4.0)); 
+        NamedCommands.registerCommand("RunIntakeRollers", new IntakePercent_Com(m_intakeroller, 1.0).withTimeout(2.5)); 
         NamedCommands.registerCommand("PivotUp", new IntakePivotToPosition(m_intakepivot, 0.0).withTimeout(2.5));
         NamedCommands.registerCommand("FlywheelsTrench", new SetFlywheelSpeed_Com(m_shooter, () -> 2000).withTimeout(2.0));
         NamedCommands.registerCommand("FlywheelsTrenchLong", new SetFlywheelSpeed_Com(m_shooter, () -> 2000).withTimeout(5.0)); 
-        NamedCommands.registerCommand("HopperLong", new HopperPercent_Com(m_hopper, 0.75).withTimeout(4.5));
+        NamedCommands.registerCommand("FlywheelsTrenchMiddle", new SetFlywheelSpeed_Com(m_shooter, () -> 2000).withTimeout(3.0));
+        NamedCommands.registerCommand("HopperLong", new HopperPercent_Com(m_hopper, 1.0).withTimeout(4.5));
+        NamedCommands.registerCommand("HopperMiddle", new HopperPercent_Com(m_hopper, 1.0).withTimeout(3.0)); 
+        NamedCommands.registerCommand("FlywheelsTrenchForever", new SetFlywheelSpeed_Com(m_shooter, () -> 2000).withTimeout(20.5));
 
         /* Trench */
         NamedCommands.registerCommand("RollersShort", new IntakePercent_Com(m_intakeroller, 0.35).withTimeout(3.0)); 
@@ -218,7 +221,7 @@ public class RobotContainer {
         driverController.b().onTrue(new IntakePivotToPosition(m_intakepivot, -3.1)); 
 
 
-        driverController.rightTrigger().toggleOnTrue(new IntakePercent_Com(m_intakeroller, 0.6));
+        driverController.rightTrigger().toggleOnTrue(new IntakePercent_Com(m_intakeroller, 1.0));
 
         driverController.x().onTrue(drivetrain.runOnce(() -> {
             drivetrain.seedFieldCentric();
@@ -229,7 +232,7 @@ public class RobotContainer {
         operatorController.pov(0).onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 2750.0)); //up on dpad - to shoot from corner
         operatorController.y().onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 0.0)); 
         operatorController.a().onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 2000)); //to shoot from general radius 
-        operatorController.rightTrigger().toggleOnTrue(new HopperPercent_Com(m_hopper, 0.8)); 
+        operatorController.rightTrigger().toggleOnTrue(new HopperPercent_Com(m_hopper, 1.0)); 
 
         operatorController.leftTrigger().whileTrue(
                 new ParallelCommandGroup(
