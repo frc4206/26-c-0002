@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.590227272727272,
-        "y": 0.44822727272727325
+        "x": 5.631454545454545,
+        "y": 0.31423863636363647
       },
       "isLocked": false,
       "linkedName": "SpeedyRight.2"
@@ -20,7 +20,7 @@
         "y": 3.375363636363636
       },
       "prevControl": {
-        "x": 6.930113636363636,
+        "x": 7.259931818181818,
         "y": 0.18024999999999958
       },
       "nextControl": null,
@@ -30,7 +30,7 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 0.11006289308176109,
+      "waypointRelativePos": 0.056603773584905676,
       "rotationDegrees": 90.0
     },
     {
