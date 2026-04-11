@@ -247,7 +247,7 @@ public class RobotContainer {
                         ),
                         // Hopper spins after a small delay
                         new SequentialCommandGroup(
-                                new WaitCommand(0.25),
+                                new WaitCommand(0.50),
                                 new HopperPercent_Com(m_hopper, 1.0))
                         //intake is out of the sequence bc it's slow and we like controlling it pls don't freak out this was on purpose
                         // Toggle intake runs independently after 1.2 seconds
