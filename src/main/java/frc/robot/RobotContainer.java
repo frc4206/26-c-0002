@@ -126,7 +126,7 @@ public class RobotContainer {
 
         /* Pathplanner Named Commands */
         /* Basic */
-        NamedCommands.registerCommand("Hopper", new HopperPercent_Com(m_hopper, 200).withTimeout(1.5));
+        NamedCommands.registerCommand("Hopper", new HopperPercent_Com(m_hopper, -200).withTimeout(1.5));
         NamedCommands.registerCommand("Flywheels", new SetFlywheelSpeed_Com(m_shooter, () -> 1775).withTimeout(2.0));
         NamedCommands.registerCommand("PivotDown", new IntakePivotToPosition(m_intakepivot, -3.0).withTimeout(1.5));
         NamedCommands.registerCommand("RunIntakeRollers", new IntakePercent_Com(m_intakeroller, 1.0).withTimeout(1.85)); 
@@ -134,8 +134,8 @@ public class RobotContainer {
         NamedCommands.registerCommand("FlywheelsTrench", new SetFlywheelSpeed_Com(m_shooter, () -> 2000).withTimeout(2.0));
         NamedCommands.registerCommand("FlywheelsTrenchLong", new SetFlywheelSpeed_Com(m_shooter, () -> 2000).withTimeout(5.0)); 
         NamedCommands.registerCommand("FlywheelsTrenchMiddle", new SetFlywheelSpeed_Com(m_shooter, () -> 2000).withTimeout(3.0));
-        NamedCommands.registerCommand("HopperLong", new HopperPercent_Com(m_hopper, 200).withTimeout(4.5));
-        NamedCommands.registerCommand("HopperMiddle", new HopperPercent_Com(m_hopper, 200).withTimeout(3.0)); 
+        NamedCommands.registerCommand("HopperLong", new HopperPercent_Com(m_hopper, -200).withTimeout(4.5));
+        NamedCommands.registerCommand("HopperMiddle", new HopperPercent_Com(m_hopper, -200).withTimeout(3.0)); 
         NamedCommands.registerCommand("FlywheelsTrenchForever", new SetFlywheelSpeed_Com(m_shooter, () -> 2100).withTimeout(20.5));
 
         /* Trench */
@@ -151,12 +151,12 @@ public class RobotContainer {
 
     public void initHubDistanceShooterSpeedMap() {
         // gotta rebuild the table
-        hdssm.put(1.4, 1440.0); // TIME TO FLIGHT: 0.7825 //1620.0 
-        hdssm.put(2.1, 1640.0); // TIME TO FLIGHT: 0.9250 //1820.0
-        hdssm.put(2.9, 1800.0); // TIME TO FLIGHT: 0.9625 //1980.0
-        hdssm.put(3.5, 2000.0); // TIME TO FLIGHT: 1.0750 //2180.0
-        hdssm.put(4.0, 2200.0); // TIME TO FLIGHT: 1.1750 //2380.0
-        hdssm.put(5.0, 2600.0); // TIME TO FLIGHT: 1.2375 //2780.0
+        hdssm.put(1.4, 1540.0); // TIME TO FLIGHT: 0.7825 //1440.0 
+        hdssm.put(2.1, 1740.0); // TIME TO FLIGHT: 0.9250 //1640.0
+        hdssm.put(2.9, 1900.0); // TIME TO FLIGHT: 0.9625 //1800.0
+        hdssm.put(3.5, 2100.0); // TIME TO FLIGHT: 1.0750 //2000.0
+        hdssm.put(4.0, 2300.0); // TIME TO FLIGHT: 1.1750 //2200.0
+        hdssm.put(5.0, 2700.0); // TIME TO FLIGHT: 1.2375 //2600.0
 
         m_vision.hdssm = this.hdssm;
     }
@@ -195,7 +195,7 @@ public class RobotContainer {
 
     private void configureBindings() {
 
-        double auto_aim_speed_modifier = 0.4d;
+        double auto_aim_speed_modifier = 0.1d;
 
         /* Driver */
         drivetrain.setDefaultCommand(
@@ -233,7 +233,7 @@ public class RobotContainer {
         operatorController.pov(0).onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 2750.0)); //up on dpad - to shoot from corner
         operatorController.y().onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 0.0)); 
         operatorController.a().onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 2000)); //to shoot from general radius 
-        operatorController.rightTrigger().toggleOnTrue(new HopperPercent_Com(m_hopper, 200)); 
+        operatorController.rightTrigger().toggleOnTrue(new HopperPercent_Com(m_hopper, -200)); 
 
         operatorController.leftTrigger().whileTrue(
                 new ParallelCommandGroup(
@@ -249,7 +249,7 @@ public class RobotContainer {
                         // Hopper spins after a small delay
                         new SequentialCommandGroup(
                                 new WaitCommand(0.50),
-                                new HopperPercent_Com(m_hopper, 200))
+                                new HopperPercent_Com(m_hopper, -200))
                         //intake is out of the sequence bc it's slow and we like controlling it pls don't freak out this was on purpose
                         // Toggle intake runs independently after 1.2 seconds
                         // new SequentialCommandGroup(
