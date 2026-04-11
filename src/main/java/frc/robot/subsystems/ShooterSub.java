@@ -9,12 +9,15 @@ import org.team4206.battleaid.common.LoadableConfig;
 import com.ctre.phoenix6.configs.MotorOutputConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.DutyCycleOut;
+import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.VelocityDutyCycle;
+import com.ctre.phoenix6.controls.VelocityTorqueCurrentFOC;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.controls.compound.Diff_VelocityDutyCycle_Velocity;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.InvertedValue;
+import com.ctre.phoenix6.signals.MotorAlignmentValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.math.interpolation.InterpolatingDoubleTreeMap;
@@ -28,8 +31,8 @@ public class ShooterSub extends SubsystemBase {
   /** Creates a new ShooterSub. */
   public double targetSpeed = 0.5;
 
-  public double VOLTAGE_TO_OVERCOME_STATIC_FRICTION = 0.26d; // VOLTS, tested by hand, DO NOT change
-  public double VOLTAGE_TO_MAINTAIN_SPEED = 0.13d;
+  public double VOLTAGE_TO_OVERCOME_STATIC_FRICTION = 6.7d; // VOLTS, tested by hand, DO NOT change //.26
+  public double VOLTAGE_TO_MAINTAIN_SPEED = 0.033; //0.13
 
   /* Configs */
   ConfigTalonFX.Config shooterMotor1Config = new ConfigTalonFX.Config("ShooterMotor1.toml");
@@ -71,12 +74,13 @@ public class ShooterSub extends SubsystemBase {
 
     this.m_vision = vision;
 
-    // shooterMotor1Apply.applyConfigs();
+    shooterMotor2.setControl(new Follower(25, MotorAlignmentValue.Opposed));    
+    
 
     motor1config.Slot0.kS = VOLTAGE_TO_OVERCOME_STATIC_FRICTION;
     motor1config.Slot0.kV = VOLTAGE_TO_MAINTAIN_SPEED;
-    motor1config.Slot0.kP = 0.72d;
-    motor1config.Slot0.kI = 0.0d;
+    motor1config.Slot0.kP = 12.0d; //0.72
+    motor1config.Slot0.kI = 0.0d; 
     motor1config.Slot0.kD = 0.0d;
     motor1config.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     motor1config.CurrentLimits.SupplyCurrentLimit = 60;
@@ -87,18 +91,18 @@ public class ShooterSub extends SubsystemBase {
     motor1config.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
     shooterMotor1.getConfigurator().apply(motor1config);
 
-    motor2config.Slot0.kS = VOLTAGE_TO_OVERCOME_STATIC_FRICTION;
-    motor2config.Slot0.kV = VOLTAGE_TO_MAINTAIN_SPEED;
-    motor2config.Slot0.kP = 0.72d;
-    motor2config.Slot0.kI = 0.0d;
-    motor2config.Slot0.kD = 0.0d;
+    // motor2config.Slot0.kS = VOLTAGE_TO_OVERCOME_STATIC_FRICTION;
+    // motor2config.Slot0.kV = VOLTAGE_TO_MAINTAIN_SPEED;
+    // motor2config.Slot0.kP = 0.72d;
+    // motor2config.Slot0.kI = 0.0d;
+    // motor2config.Slot0.kD = 0.0d;
     motor2config.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     motor2config.CurrentLimits.SupplyCurrentLimit = 60;
     motor2config.CurrentLimits.SupplyCurrentLimitEnable = true;
     motor2config.CurrentLimits.StatorCurrentLimit = 120;
     motor2config.CurrentLimits.StatorCurrentLimitEnable = true;
 
-    motor2config.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
+    // motor2config.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
     shooterMotor2.getConfigurator().apply(motor2config);
 
     // TODO: put this interpolation table into a seperate file!
@@ -141,34 +145,37 @@ public class ShooterSub extends SubsystemBase {
 
   public void setPercentage_func(double percentage) {
     shooterMotor1.set(percentage);
-    shooterMotor2.set(percentage);
+    // shooterMotor2.set(percentage);
   }
 
   public void incrementSpeedTesting() {
     // shooterMotor1.set(targetSpeed);
     // shooterMotor2.set(-targetSpeed);
-    shooterMotor1.setControl(new DutyCycleOut(targetSpeed));
-    shooterMotor2.setControl(new DutyCycleOut(targetSpeed));
+    // shooterMotor1.setControl(new DutyCycleOut(targetSpeed)); 
+    shooterMotor1.setControl(new VelocityTorqueCurrentFOC(targetSpeed));
+    // shooterMotor2.setControl(new DutyCycleOut(targetSpeed));
   }
 
   public void autoRangeFire_dist_func(double distance) {
 
     shooterMotor1.setControl(new DutyCycleOut(autoRangeMap.get(distance)));
-    shooterMotor2.setControl(new DutyCycleOut(autoRangeMap.get(distance)));
+    // shooterMotor2.setControl(new DutyCycleOut(autoRangeMap.get(distance)));
     // for (int i = 0; i < 10; i++) {
     //   System.out.println("planned speed: " + autoRangeMap.get(distance));
     // }
   }
 
   public void autoRangeFire_func(double distance) {
-    shooterMotor1.setControl(new VelocityVoltage(autoRangeMap.get(distance) / 60).withSlot(0));
-    shooterMotor2.setControl(new VelocityVoltage(autoRangeMap.get(distance) / 60).withSlot(0));
+    // shooterMotor1.setControl(new VelocityVoltage(autoRangeMap.get(distance) / 60).withSlot(0)); 
+    shooterMotor1.setControl(new VelocityTorqueCurrentFOC(autoRangeMap.get(distance) / 60).withSlot(0));
+    // shooterMotor2.setControl(new VelocityVoltage(autoRangeMap.get(distance) / 60).withSlot(0));
   }
 
   public void setFlywheelSpeedWithRPM(double rpm)
   {
-    shooterMotor1.setControl(new VelocityVoltage(rpm / 60).withSlot(0));
-    shooterMotor2.setControl(new VelocityVoltage(rpm / 60).withSlot(0)); 
+    // shooterMotor1.setControl(new VelocityVoltage(rpm / 60).withSlot(0));
+    shooterMotor1.setControl(new VelocityTorqueCurrentFOC(rpm / 60).withSlot(0));
+    // shooterMotor2.setControl(new VelocityVoltage(rpm / 60).withSlot(0)); 
   }
 
   public void incrementSpeedUp(double increment) {
@@ -192,14 +199,15 @@ public class ShooterSub extends SubsystemBase {
       m_lastPrintTime = currentTime;
     }
 
-    shooterMotor1.setControl(new VelocityVoltage(velocity).withSlot(0));
-    shooterMotor2.setControl(new VelocityVoltage(velocity).withSlot(0));
+    // shooterMotor1.setControl(new VelocityVoltage(velocity).withSlot(0));
+    shooterMotor1.setControl(new VelocityTorqueCurrentFOC(velocity).withSlot(0));
+    // shooterMotor2.setControl(new VelocityVoltage(velocity).withSlot(0));
   }
 
   public void setFlywheelVoltage(double voltage) {
     VoltageOut voltageRequest = new VoltageOut(0.1);
     shooterMotor1.setControl(voltageRequest.withOutput(voltage));
-    shooterMotor2.setControl(voltageRequest.withOutput(voltage));
+    // shooterMotor2.setControl(voltageRequest.withOutput(voltage));
   }
 
   @Override
@@ -218,13 +226,14 @@ public class ShooterSub extends SubsystemBase {
     // Use TalonFX VelocityVoltage control
     VelocityVoltage control = new VelocityVoltage(ticksPer100ms);
     shooterMotor1.setControl(control);
-    shooterMotor2.setControl(control);
+    // shooterMotor2.setControl(control);
+    
   }
 
   /** Stop the shooter motors */
   public void stop() {
     shooterMotor1.setControl(new VoltageOut(0));
-    shooterMotor2.setControl(new VoltageOut(0));
+    // shooterMotor2.setControl(new VoltageOut(0));
   }
 
   /** Helper: Convert RPM to TalonFX units per 100ms */

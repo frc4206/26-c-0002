@@ -16,6 +16,7 @@ import org.team4206.battleaid.common.TunedJoystick;
 import org.team4206.battleaid.common.TunedJoystick.ResponseCurve;
 
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
+import com.ctre.phoenix6.controls.VelocityTorqueCurrentFOC;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
@@ -125,7 +126,7 @@ public class RobotContainer {
 
         /* Pathplanner Named Commands */
         /* Basic */
-        NamedCommands.registerCommand("Hopper", new HopperPercent_Com(m_hopper, 1.0).withTimeout(1.5));
+        NamedCommands.registerCommand("Hopper", new HopperPercent_Com(m_hopper, 200).withTimeout(1.5));
         NamedCommands.registerCommand("Flywheels", new SetFlywheelSpeed_Com(m_shooter, () -> 1775).withTimeout(2.0));
         NamedCommands.registerCommand("PivotDown", new IntakePivotToPosition(m_intakepivot, -3.0).withTimeout(1.5));
         NamedCommands.registerCommand("RunIntakeRollers", new IntakePercent_Com(m_intakeroller, 1.0).withTimeout(1.85)); 
@@ -133,8 +134,8 @@ public class RobotContainer {
         NamedCommands.registerCommand("FlywheelsTrench", new SetFlywheelSpeed_Com(m_shooter, () -> 2000).withTimeout(2.0));
         NamedCommands.registerCommand("FlywheelsTrenchLong", new SetFlywheelSpeed_Com(m_shooter, () -> 2000).withTimeout(5.0)); 
         NamedCommands.registerCommand("FlywheelsTrenchMiddle", new SetFlywheelSpeed_Com(m_shooter, () -> 2000).withTimeout(3.0));
-        NamedCommands.registerCommand("HopperLong", new HopperPercent_Com(m_hopper, 1.0).withTimeout(4.5));
-        NamedCommands.registerCommand("HopperMiddle", new HopperPercent_Com(m_hopper, 1.0).withTimeout(3.0)); 
+        NamedCommands.registerCommand("HopperLong", new HopperPercent_Com(m_hopper, 200).withTimeout(4.5));
+        NamedCommands.registerCommand("HopperMiddle", new HopperPercent_Com(m_hopper, 200).withTimeout(3.0)); 
         NamedCommands.registerCommand("FlywheelsTrenchForever", new SetFlywheelSpeed_Com(m_shooter, () -> 2100).withTimeout(20.5));
 
         /* Trench */
@@ -232,7 +233,7 @@ public class RobotContainer {
         operatorController.pov(0).onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 2750.0)); //up on dpad - to shoot from corner
         operatorController.y().onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 0.0)); 
         operatorController.a().onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 2000)); //to shoot from general radius 
-        operatorController.rightTrigger().toggleOnTrue(new HopperPercent_Com(m_hopper, 1.0)); 
+        operatorController.rightTrigger().toggleOnTrue(new HopperPercent_Com(m_hopper, 200)); 
 
         operatorController.leftTrigger().whileTrue(
                 new ParallelCommandGroup(
@@ -248,7 +249,7 @@ public class RobotContainer {
                         // Hopper spins after a small delay
                         new SequentialCommandGroup(
                                 new WaitCommand(0.50),
-                                new HopperPercent_Com(m_hopper, 1.0))
+                                new HopperPercent_Com(m_hopper, 200))
                         //intake is out of the sequence bc it's slow and we like controlling it pls don't freak out this was on purpose
                         // Toggle intake runs independently after 1.2 seconds
                         // new SequentialCommandGroup(

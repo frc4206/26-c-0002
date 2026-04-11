@@ -41,7 +41,7 @@ public class SetFlywheelSpeed_Com extends Command {
   @Override
   public void end(boolean interrupted) {
     m_shooter.shooterMotor1.setControl(new DutyCycleOut(0));
-    m_shooter.shooterMotor2.setControl(new DutyCycleOut(0));
+    // m_shooter.shooterMotor2.setControl(new DutyCycleOut(0));
   }
 
   // Returns true when the command should end.
