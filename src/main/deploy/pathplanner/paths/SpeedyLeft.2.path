@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.084477272727272,
-        "y": 4.591568181818182
+        "x": 7.0950227272727275,
+        "y": 4.519420454545455
       },
       "prevControl": null,
       "nextControl": {
-        "x": 8.702886363636363,
-        "y": 7.786681818181817
+        "x": 8.630738636363638,
+        "y": 8.363863636363636
       },
       "isLocked": false,
       "linkedName": "SpeedyLeft.1"
     },
     {
       "anchor": {
-        "x": 3.621625,
-        "y": 7.477477272727273
+        "x": 3.3948749999999994,
+        "y": 7.487784090909091
       },
       "prevControl": {
-        "x": 5.8685113636363635,
-        "y": 7.838215909090909
+        "x": 6.012806818181818,
+        "y": 7.590852272727272
       },
       "nextControl": null,
       "isLocked": false,
@@ -34,7 +34,7 @@
       "rotationDegrees": -90.0
     },
     {
-      "waypointRelativePos": 0.867123287671237,
+      "waypointRelativePos": 0.9339622641509456,
       "rotationDegrees": -90.0
     }
   ],
@@ -51,7 +51,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -75.25643716352934
+    "rotation": -73.41266144307258
   },
   "reversed": false,
   "folder": "SpeedyLeft",

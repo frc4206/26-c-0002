@@ -129,14 +129,14 @@ public class RobotContainer {
         NamedCommands.registerCommand("Hopper", new HopperPercent_Com(m_hopper, -200).withTimeout(1.5));
         NamedCommands.registerCommand("Flywheels", new SetFlywheelSpeed_Com(m_shooter, () -> 1775).withTimeout(2.0));
         NamedCommands.registerCommand("PivotDown", new IntakePivotToPosition(m_intakepivot, -3.0).withTimeout(1.5));
-        NamedCommands.registerCommand("RunIntakeRollers", new IntakePercent_Com(m_intakeroller, 1.0).withTimeout(1.85)); 
+        NamedCommands.registerCommand("RunIntakeRollers", new IntakePercent_Com(m_intakeroller, 1.0).withTimeout(2.0)); 
         NamedCommands.registerCommand("PivotUp", new IntakePivotToPosition(m_intakepivot, 0.0).withTimeout(2.5));
-        NamedCommands.registerCommand("FlywheelsTrench", new SetFlywheelSpeed_Com(m_shooter, () -> 2000).withTimeout(2.0));
-        NamedCommands.registerCommand("FlywheelsTrenchLong", new SetFlywheelSpeed_Com(m_shooter, () -> 2000).withTimeout(5.0)); 
-        NamedCommands.registerCommand("FlywheelsTrenchMiddle", new SetFlywheelSpeed_Com(m_shooter, () -> 2000).withTimeout(3.0));
+        NamedCommands.registerCommand("FlywheelsTrench", new SetFlywheelSpeed_Com(m_shooter, () -> 2100).withTimeout(2.0));
+        NamedCommands.registerCommand("FlywheelsTrenchLong", new SetFlywheelSpeed_Com(m_shooter, () -> 2100).withTimeout(5.0)); 
+        NamedCommands.registerCommand("FlywheelsTrenchMiddle", new SetFlywheelSpeed_Com(m_shooter, () -> 2100).withTimeout(3.0));
         NamedCommands.registerCommand("HopperLong", new HopperPercent_Com(m_hopper, -200).withTimeout(4.5));
         NamedCommands.registerCommand("HopperMiddle", new HopperPercent_Com(m_hopper, -200).withTimeout(3.0)); 
-        NamedCommands.registerCommand("FlywheelsTrenchForever", new SetFlywheelSpeed_Com(m_shooter, () -> 2100).withTimeout(20.5));
+        NamedCommands.registerCommand("FlywheelsTrenchForever", new SetFlywheelSpeed_Com(m_shooter, () -> 2200).withTimeout(20.5));
 
         /* Trench */
         NamedCommands.registerCommand("RollersShort", new IntakePercent_Com(m_intakeroller, 0.35).withTimeout(3.0)); 
@@ -151,12 +151,12 @@ public class RobotContainer {
 
     public void initHubDistanceShooterSpeedMap() {
         // gotta rebuild the table
-        hdssm.put(1.4, 1540.0); // TIME TO FLIGHT: 0.7825 //1440.0 
-        hdssm.put(2.1, 1740.0); // TIME TO FLIGHT: 0.9250 //1640.0
-        hdssm.put(2.9, 1900.0); // TIME TO FLIGHT: 0.9625 //1800.0
-        hdssm.put(3.5, 2100.0); // TIME TO FLIGHT: 1.0750 //2000.0
-        hdssm.put(4.0, 2300.0); // TIME TO FLIGHT: 1.1750 //2200.0
-        hdssm.put(5.0, 2700.0); // TIME TO FLIGHT: 1.2375 //2600.0
+        hdssm.put(1.4, 1590.0); // TIME TO FLIGHT: 0.7825 //1440.0 //1540.0 
+        hdssm.put(2.1, 1790.0); // TIME TO FLIGHT: 0.9250 //1640.0 //1740.0
+        hdssm.put(2.9, 1950.0); // TIME TO FLIGHT: 0.9625 //1800.0 //1900.0
+        hdssm.put(3.5, 2150.0); // TIME TO FLIGHT: 1.0750 //2000.0 //2100.0
+        hdssm.put(4.0, 2350.0); // TIME TO FLIGHT: 1.1750 //2200.0 //2300.0
+        hdssm.put(5.0, 2750.0); // TIME TO FLIGHT: 1.2375 //2600.0 //2700.0
 
         m_vision.hdssm = this.hdssm;
     }

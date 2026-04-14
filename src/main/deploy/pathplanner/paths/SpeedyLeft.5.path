@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.673159090909091,
-        "y": 7.508397727272728
+        "x": 3.4257954545454545,
+        "y": 7.487784090909091
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.673159090909091,
-        "y": 7.508397727272728
+        "x": 6.260170454545454,
+        "y": 7.384715909090909
       },
       "isLocked": false,
       "linkedName": "SpeedyLeft.4"
     },
     {
       "anchor": {
-        "x": 6.919806818181818,
-        "y": 5.673784090909091
+        "x": 6.425079545454545,
+        "y": 5.62225
       },
       "prevControl": {
-        "x": 7.249625,
-        "y": 8.054659090909091
+        "x": 7.146556818181818,
+        "y": 8.302022727272728
       },
       "nextControl": null,
       "isLocked": false,
@@ -57,7 +57,7 @@
   "folder": "SpeedyLeft",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -76.70142966950574
+    "rotation": -70.01689347810004
   },
   "useDefaultConstraints": true
 }
