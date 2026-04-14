@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 8.32153409090909,
-        "y": 7.559931818181818
+        "x": 7.435147727272726,
+        "y": 7.704227272727273
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 7.0950227272727275,
-        "y": 4.519420454545455
+        "x": 6.744590909090908,
+        "y": 4.416352272727273
       },
       "prevControl": {
-        "x": 7.1465568181769825,
-        "y": 7.1476590909065285
+        "x": 6.796124999995163,
+        "y": 7.044590909088346
       },
       "nextControl": null,
       "isLocked": false,
@@ -42,7 +42,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -100.00797980144154
+    "rotation": -90.0
   },
   "reversed": false,
   "folder": "SpeedyLeft",

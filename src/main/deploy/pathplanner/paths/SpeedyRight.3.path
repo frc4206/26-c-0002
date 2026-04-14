@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.631454545454545,
-        "y": 0.31423863636363647
+        "x": 6.89919318181818,
+        "y": 0.2523977272727279
       },
       "isLocked": false,
       "linkedName": "SpeedyRight.2"
@@ -57,7 +57,7 @@
   "folder": "SpeedyRight",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 70.2531633945738
+    "rotation": 75.37912601136829
   },
   "useDefaultConstraints": false
 }

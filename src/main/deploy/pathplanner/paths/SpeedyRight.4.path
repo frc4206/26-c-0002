@@ -20,8 +20,8 @@
         "y": 0.5822159090909098
       },
       "prevControl": {
-        "x": 6.693056818181819,
-        "y": 0.5100681818181818
+        "x": 6.744590909090908,
+        "y": 0.5203750000000003
       },
       "nextControl": null,
       "isLocked": false,
@@ -51,7 +51,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 77.27564431457759
+    "rotation": 75.32360686254998
   },
   "reversed": false,
   "folder": "SpeedyRight",
