@@ -93,7 +93,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "FlywheelsTrenchLong"
+                  "name": "FlywheelsTrench"
                 }
               },
               {
@@ -109,7 +109,7 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "HopperLong"
+                        "name": "Hopper"
                       }
                     }
                   ]
@@ -122,7 +122,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 1.0
+                        "waitTime": 0.5
                       }
                     },
                     {
@@ -138,9 +138,98 @@
           }
         },
         {
-          "type": "wait",
+          "type": "parallel",
           "data": {
-            "waitTime": 5.5
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "BasicLeft.5"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "PivotDown"
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 1.0
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "RunIntakeRollers"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BasicLeft6"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "FlywheelsTrench"
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.6
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Hopper"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.5
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "PivotUp"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
           }
         },
         {
