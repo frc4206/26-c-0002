@@ -71,9 +71,9 @@ public class HopperSub extends SubsystemBase {
   }
 
   public void setPercentage_func(double percentage) {
-    hopperMotor1.setControl(new DutyCycleOut(-percentage));
+    // hopperMotor1.setControl(new DutyCycleOut(-percentage));
     // hopperMotor2.setControl(new DutyCycleOut(percentage)); 
-    // hopperMotor1.setControl(new VelocityTorqueCurrentFOC(percentage).withSlot(0)); 
+    hopperMotor1.setControl(new VelocityTorqueCurrentFOC(percentage).withSlot(0)); 
   }
 
   @Override

@@ -93,7 +93,7 @@
               {
                 "type": "named",
                 "data": {
-                  "name": "FlywheelsTrench"
+                  "name": "FlywheelsTrenchLong"
                 }
               },
               {
@@ -109,7 +109,70 @@
                     {
                       "type": "named",
                       "data": {
-                        "name": "Hopper"
+                        "name": "HopperLong"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 1.0
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "PivotUp"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 5.5
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "BasicLeft.4"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "PivotDown"
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 0.5
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "RunIntakeRollers"
                       }
                     }
                   ]

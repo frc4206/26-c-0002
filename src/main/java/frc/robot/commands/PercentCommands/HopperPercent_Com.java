@@ -4,6 +4,7 @@
 
 package frc.robot.commands.PercentCommands;
 
+import com.ctre.phoenix6.controls.DutyCycleOut;
 import com.ctre.phoenix6.controls.VelocityTorqueCurrentFOC;
 
 import edu.wpi.first.wpilibj2.command.Command;
@@ -35,7 +36,7 @@ public class HopperPercent_Com extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_hopperSub.setPercentage_func(0);
+    m_hopperSub.hopperMotor1.setControl(new DutyCycleOut(0));
   }
 
   // Returns true when the command should end.
