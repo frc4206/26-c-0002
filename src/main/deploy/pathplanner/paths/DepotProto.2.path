@@ -1,0 +1,72 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 3.075363636363636,
+        "y": 4.99353409090909
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 0.32344318181818155,
+        "y": 4.838931818181818
+      },
+      "isLocked": false,
+      "linkedName": "DepotProto.1"
+    },
+    {
+      "anchor": {
+        "x": 0.6429545454545453,
+        "y": 7.178579545454545
+      },
+      "prevControl": {
+        "x": 0.43681818181818133,
+        "y": 4.849238636363636
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "DepotProto.2"
+    }
+  ],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.29559748427672955,
+      "rotationDegrees": 102.19789789650775
+    }
+  ],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "PivotDown",
+      "waypointRelativePos": 0.2549371633752246,
+      "endWaypointRelativePos": null,
+      "command": null
+    },
+    {
+      "name": "RunIntakeRollers",
+      "waypointRelativePos": 0.4847396768402156,
+      "endWaypointRelativePos": 1.0,
+      "command": null
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 90.83031548625802
+  },
+  "reversed": false,
+  "folder": "DepotProto",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": -34.25812772495295
+  },
+  "useDefaultConstraints": true
+}

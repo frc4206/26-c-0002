@@ -1,0 +1,54 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 0.6429545454545453,
+        "y": 7.178579545454545
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.3745,
+        "y": 7.364102272727273
+      },
+      "isLocked": false,
+      "linkedName": "DepotProto.2"
+    },
+    {
+      "anchor": {
+        "x": 4.164973166368515,
+        "y": 7.531574239713775
+      },
+      "prevControl": {
+        "x": 3.1342913481866974,
+        "y": 7.438812876077411
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "DepotProto.3"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -82.21071452203833
+  },
+  "reversed": false,
+  "folder": "DepotProto",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 90.83031548625802
+  },
+  "useDefaultConstraints": true
+}
