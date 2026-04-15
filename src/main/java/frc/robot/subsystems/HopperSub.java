@@ -8,10 +8,7 @@ import org.team4206.battleaid.common.LoadableConfig;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.DutyCycleOut;
-import com.ctre.phoenix6.controls.Follower;
-import com.ctre.phoenix6.controls.VelocityTorqueCurrentFOC;
 import com.ctre.phoenix6.hardware.TalonFX;
-import com.ctre.phoenix6.signals.MotorAlignmentValue;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.common.ConfigTalonFX;
@@ -46,14 +43,6 @@ public class HopperSub extends SubsystemBase {
   public HopperSub(Config hopperConfig) {
     this.hopperConfig = hopperConfig; 
 
-    hopperMotor2.setControl(new Follower(40, MotorAlignmentValue.Opposed));
-    
-    motor1Config.Slot0.kS = 5.0d; 
-    motor1Config.Slot0.kV = 0.12d; 
-    motor1Config.Slot0.kP = 7.0d; 
-    motor1Config.Slot0.kI = 1.5d; 
-    motor1Config.Slot0.kD = 0.3d; 
-
     motor1Config.CurrentLimits.SupplyCurrentLimit = 40;
     motor1Config.CurrentLimits.SupplyCurrentLimitEnable = true; 
     motor1Config.CurrentLimits.StatorCurrentLimit = 120;
@@ -68,9 +57,8 @@ public class HopperSub extends SubsystemBase {
   }
 
   public void setPercentage_func(double percentage) {
-    // hopperMotor1.setControl(new DutyCycleOut(-percentage));
-    // hopperMotor2.setControl(new DutyCycleOut(percentage)); 
-    hopperMotor1.setControl(new VelocityTorqueCurrentFOC(percentage).withSlot(0)); 
+    hopperMotor1.setControl(new DutyCycleOut(-percentage));
+    hopperMotor2.setControl(new DutyCycleOut(percentage)); 
   }
 
   @Override
