@@ -46,6 +46,7 @@ import frc.robot.commands.IncrementSpeedUp_Com;
 // import frc.robot.commands.IntakeJoystick_Com;
 import frc.robot.commands.SetFlywheelSpeed_Com;
 import frc.robot.commands.ToggleIntakePosition;
+import frc.robot.commands.adjustHood_Com;
 import frc.robot.commands.IntakePivotToPosition;
 import frc.robot.commands.autoRangeFire_Com;
 import frc.robot.commands.PercentCommands.HopperPercent_Com;
@@ -59,6 +60,7 @@ import frc.robot.subsystems.IntakePivotSub;
 import frc.robot.subsystems.IntakeRollerSub;
 import frc.robot.subsystems.ShooterSub;
 import frc.robot.subsystems.VisionSub;
+import frc.robot.subsystems.hoodSub;
 
 public class RobotContainer {
     /* Subsystems */
@@ -69,6 +71,7 @@ public class RobotContainer {
     final IntakePivotSub m_intakepivot = new IntakePivotSub();
 
     private final IntakeRollerSub m_intakeroller = new IntakeRollerSub();
+    private final hoodSub m_hood = new hoodSub();
 
     public Robot m_Robot;
 
@@ -234,6 +237,8 @@ public class RobotContainer {
         operatorController.y().onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 0.0)); 
         operatorController.a().onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 2000)); //to shoot from general radius 
         operatorController.rightTrigger().toggleOnTrue(new HopperPercent_Com(m_hopper, -200)); 
+
+        operatorController.pov(180).onTrue(new adjustHood_Com(m_hood));
 
         operatorController.leftTrigger().whileTrue(
                 new ParallelCommandGroup(
