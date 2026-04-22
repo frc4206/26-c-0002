@@ -137,6 +137,8 @@ public class RobotContainer {
         NamedCommands.registerCommand("HopperLong", new HopperPercent_Com(m_hopper, -200).withTimeout(4.5));
         NamedCommands.registerCommand("HopperMiddle", new HopperPercent_Com(m_hopper, -200).withTimeout(3.0)); 
         NamedCommands.registerCommand("FlywheelsTrenchForever", new SetFlywheelSpeed_Com(m_shooter, () -> 2200).withTimeout(20.5));
+        NamedCommands.registerCommand("FlywheelsShortForever", new SetFlywheelSpeed_Com(m_shooter, () -> 1775).withTimeout(20.5));
+        NamedCommands.registerCommand("RollersLong", new IntakePercent_Com(m_intakeroller, 1.0).withTimeout(5));
 
         /* Trench */
         NamedCommands.registerCommand("RollersShort", new IntakePercent_Com(m_intakeroller, 0.35).withTimeout(3.0)); 
