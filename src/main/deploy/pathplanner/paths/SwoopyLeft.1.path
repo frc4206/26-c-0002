@@ -80,11 +80,11 @@
     },
     {
       "anchor": {
-        "x": 3.2505795454545447,
+        "x": 3.251,
         "y": 7.364102272727273
       },
       "prevControl": {
-        "x": 3.7040795454545448,
+        "x": 3.7045,
         "y": 7.82790909090909
       },
       "nextControl": null,
@@ -130,7 +130,7 @@
     "rotation": -71.11391263029073
   },
   "reversed": false,
-  "folder": null,
+  "folder": "SwoopyLeft",
   "idealStartingState": {
     "velocity": 0,
     "rotation": -90.0
