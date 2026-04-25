@@ -139,6 +139,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("FlywheelsTrenchForever", new SetFlywheelSpeed_Com(m_shooter, () -> 2200).withTimeout(20.5));
         NamedCommands.registerCommand("FlywheelsShortForever", new SetFlywheelSpeed_Com(m_shooter, () -> 1775).withTimeout(20.5));
         NamedCommands.registerCommand("RollersLong", new IntakePercent_Com(m_intakeroller, 1.0).withTimeout(5));
+        NamedCommands.registerCommand("FlywheelsDelayedForever", new SetFlywheelSpeed_Com(m_shooter, () -> 2300).withTimeout(20.5));
 
         /* Trench */
         NamedCommands.registerCommand("RollersShort", new IntakePercent_Com(m_intakeroller, 0.35).withTimeout(3.0)); 
@@ -231,8 +232,9 @@ public class RobotContainer {
             drivetrain.getPigeon2().reset();
         }));
 
-        /* Operator */
-        operatorController.pov(0).onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 2750.0)); //up on dpad - to shoot from corner
+        /* Operator */ //max RPM of shooter is 5700
+        operatorController.pov(0).onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 2825.0)); //up on dpad - to shoot from corner
+        operatorController.pov(180).onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 5000.0)); //down on dpad - for passing
         operatorController.y().onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 0.0)); 
         operatorController.a().onTrue(new SetFlywheelSpeed_Com(m_shooter, () -> 2000)); //to shoot from general radius 
         operatorController.rightTrigger().toggleOnTrue(new HopperPercent_Com(m_hopper, -200)); 
