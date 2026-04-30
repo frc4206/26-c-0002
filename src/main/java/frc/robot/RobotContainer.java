@@ -156,9 +156,9 @@ public class RobotContainer {
         // gotta rebuild the table
         hdssm.put(1.4, 1590.0); // TIME TO FLIGHT: 0.7825 //1440.0 //1540.0 
         hdssm.put(2.1, 1790.0); // TIME TO FLIGHT: 0.9250 //1640.0 //1740.0
-        hdssm.put(2.9, 1950.0); // TIME TO FLIGHT: 0.9625 //1800.0 //1900.0
+        hdssm.put(2.9, 2125.0); // TIME TO FLIGHT: 0.9625 //1800.0 //1900.0
         hdssm.put(3.5, 2150.0); // TIME TO FLIGHT: 1.0750 //2000.0 //2100.0
-        hdssm.put(4.0, 2350.0); // TIME TO FLIGHT: 1.1750 //2200.0 //2300.0
+        hdssm.put(4.0, 2400.0); // TIME TO FLIGHT: 1.1750 //2200.0 //2300.0
         hdssm.put(5.0, 2750.0); // TIME TO FLIGHT: 1.2375 //2600.0 //2700.0
 
         m_vision.hdssm = this.hdssm;

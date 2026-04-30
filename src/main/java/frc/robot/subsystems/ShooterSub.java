@@ -85,7 +85,7 @@ public class ShooterSub extends SubsystemBase {
     motor1config.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     motor1config.CurrentLimits.SupplyCurrentLimit = 60;
     motor1config.CurrentLimits.SupplyCurrentLimitEnable = true;
-    motor1config.CurrentLimits.StatorCurrentLimit = 100;
+    motor1config.CurrentLimits.StatorCurrentLimit = 120;
     motor1config.CurrentLimits.StatorCurrentLimitEnable = true;
 
     motor1config.MotorOutput.Inverted = InvertedValue.Clockwise_Positive;
@@ -99,7 +99,7 @@ public class ShooterSub extends SubsystemBase {
     motor2config.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     motor2config.CurrentLimits.SupplyCurrentLimit = 60;
     motor2config.CurrentLimits.SupplyCurrentLimitEnable = true;
-    motor2config.CurrentLimits.StatorCurrentLimit = 100;
+    motor2config.CurrentLimits.StatorCurrentLimit = 120;
     motor2config.CurrentLimits.StatorCurrentLimitEnable = true;
 
     // motor2config.MotorOutput.Inverted = InvertedValue.CounterClockwise_Positive;
