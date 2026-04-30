@@ -22,8 +22,8 @@
         "SelectedMotorType": {
           "Name": "WCP Kraken x60",
           "FreeSpeedRps": 96.7,
-          "SlipCurrentLimit": 60,
-          "StatorCurrentLimit": 30
+          "SlipCurrentLimit": 20,
+          "StatorCurrentLimit": 40
         }
       },
       "DriveMotor": {
@@ -71,8 +71,8 @@
         "SelectedMotorType": {
           "Name": "WCP Kraken x60",
           "FreeSpeedRps": 96.7,
-          "SlipCurrentLimit": 60,
-          "StatorCurrentLimit": 30
+          "SlipCurrentLimit": 20,
+          "StatorCurrentLimit": 40
         }
       },
       "DriveMotor": {
@@ -120,8 +120,8 @@
         "SelectedMotorType": {
           "Name": "WCP Kraken x60",
           "FreeSpeedRps": 96.7,
-          "SlipCurrentLimit": 60,
-          "StatorCurrentLimit": 30
+          "SlipCurrentLimit": 20,
+          "StatorCurrentLimit": 40
         }
       },
       "DriveMotor": {
@@ -169,8 +169,8 @@
         "SelectedMotorType": {
           "Name": "WCP Kraken x60",
           "FreeSpeedRps": 96.7,
-          "SlipCurrentLimit": 60,
-          "StatorCurrentLimit": 30
+          "SlipCurrentLimit": 20,
+          "StatorCurrentLimit": 40
         }
       },
       "DriveMotor": {
